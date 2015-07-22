@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FD944A68DF532B18818DA32 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBF2F0F98D46F64C66715DB /* libPods.a */; };
 		3F43094D1B5F3A280064A43D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F43094C1B5F3A280064A43D /* main.m */; };
 		3F4309501B5F3A280064A43D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F43094F1B5F3A280064A43D /* AppDelegate.m */; };
 		3F4309531B5F3A280064A43D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4309521B5F3A280064A43D /* ViewController.m */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CBF2F0F98D46F64C66715DB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F4309471B5F3A280064A43D /* joyTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = joyTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F43094B1B5F3A280064A43D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F43094C1B5F3A280064A43D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -40,6 +42,8 @@
 		3F4309601B5F3A280064A43D /* joyTVTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = joyTVTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F4309651B5F3A280064A43D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F4309661B5F3A280064A43D /* joyTVTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = joyTVTests.m; sourceTree = "<group>"; };
+		4E7EBEBB84D30B8162713621 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		81A10B3DA3DFE53B3E6F4259 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FD944A68DF532B18818DA32 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +71,8 @@
 				3F4309491B5F3A280064A43D /* joyTV */,
 				3F4309631B5F3A280064A43D /* joyTVTests */,
 				3F4309481B5F3A280064A43D /* Products */,
+				D4483762DABC2161A0B82ABC /* Pods */,
+				F6EF1F50D19D3081BF06A2E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +126,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		D4483762DABC2161A0B82ABC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4E7EBEBB84D30B8162713621 /* Pods.debug.xcconfig */,
+				81A10B3DA3DFE53B3E6F4259 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F6EF1F50D19D3081BF06A2E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0CBF2F0F98D46F64C66715DB /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3F43096A1B5F3A280064A43D /* Build configuration list for PBXNativeTarget "joyTV" */;
 			buildPhases = (
+				B86D899D0D04425CFA9F3931 /* Check Pods Manifest.lock */,
 				3F4309431B5F3A280064A43D /* Sources */,
 				3F4309441B5F3A280064A43D /* Frameworks */,
 				3F4309451B5F3A280064A43D /* Resources */,
+				796DC805CF2513D6155C01B1 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -213,6 +239,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		796DC805CF2513D6155C01B1 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B86D899D0D04425CFA9F3931 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3F4309431B5F3A280064A43D /* Sources */ = {
@@ -345,6 +404,7 @@
 		};
 		3F43096B1B5F3A280064A43D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E7EBEBB84D30B8162713621 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = joyTV/Info.plist;
@@ -355,6 +415,7 @@
 		};
 		3F43096C1B5F3A280064A43D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81A10B3DA3DFE53B3E6F4259 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = joyTV/Info.plist;
@@ -416,6 +477,7 @@
 				3F43096C1B5F3A280064A43D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F43096D1B5F3A280064A43D /* Build configuration list for PBXNativeTarget "joyTVTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +486,7 @@
 				3F43096F1B5F3A280064A43D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
