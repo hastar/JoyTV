@@ -46,7 +46,7 @@
 {
     if (!_hotCollectView) {
         _hotCollectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 70, kScreenWidth, kScreenHeight - 70 - 40)];
-        _hotCollectView.dataUrl = nil;
+        _hotCollectView.dataUrl = @"https://newapi.meipai.com/hot/feed_timeline.json?locale=1&";
     }
     
     return  _hotCollectView;
@@ -73,6 +73,7 @@
     self.segment.selectedIndex = 0;
     self.hotCollectView.hidden = YES;
     [self.newCollectView refresh];
+    [self.hotCollectView refresh];
 }
 
 

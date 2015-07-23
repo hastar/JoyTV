@@ -45,7 +45,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.page = 1;
+        self.page = 2;
         self.isUpLoading = NO;
         self.backgroundColor = [UIColor whiteColor];
         
