@@ -7,7 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "LXTabBarController.h"
 
+
+#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+#define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define LXColor(r, g, b) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:1.0]
 @interface AppDelegate ()
 
 @end
@@ -16,9 +21,39 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+   
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    LXTabBarController *myTabBar = [[LXTabBarController alloc] init];
+    self.window.rootViewController = myTabBar;
+    
+    //更改TabBar的高度
+    ;
+    myTabBar.tabBar.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
+    for (UIView *transitionView in myTabBar.view.subviews) {
+        CGRect frame = transitionView.frame;
+        frame.size.height = kScreenHeight - 40;
+        transitionView.frame = frame;
+    }
+    
+    //更改tabbar字体样式
+    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+    textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:18];
+    textAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
+    NSMutableDictionary *selectTextAttrs = [NSMutableDictionary dictionary];
+    selectTextAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:18];
+    selectTextAttrs[NSForegroundColorAttributeName] = [UIColor yellowColor];
+    [[UITabBarItem appearance] setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:selectTextAttrs forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0, -15.0)];
+    
+    
+    
+    [self.window makeKeyAndVisible];
+    
+    
     return YES;
 }
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

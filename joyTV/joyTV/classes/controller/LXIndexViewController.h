@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LXIndexViewController.h
 //  joyTV
 //
 //  Created by lanou on 15/7/22.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface LXIndexViewController : UIViewController
 
 @end
-
