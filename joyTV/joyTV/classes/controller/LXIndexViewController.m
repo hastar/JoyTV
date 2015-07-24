@@ -10,12 +10,15 @@
 #import "LXSegmentControl.h"
 #import "LXHotCollectView.h"
 
+
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define LXColor(r, g, b) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:1.0]
 
 @interface LXIndexViewController () <LXSegmentControlDelegate>
 
+@property (nonatomic, strong) NSArray *cateArray;
+@property (nonatomic, strong) NSArray *cateLinkArray;
 @property (nonatomic, strong) LXSegmentControl *segment;
 @property (nonatomic, strong) NSMutableArray *collectArray;
 
@@ -23,34 +26,72 @@
 
 @implementation LXIndexViewController
 
+- (NSArray *)cateLinkArray
+{
+    if (!_cateLinkArray) {
+        _cateLinkArray = [[NSArray alloc] initWithObjects:@"https://newapi.meipai.com/medias/topics_timeline.json?id=13&type=1&feature=new&locale=1",
+                          @"https://newapi.meipai.com/medias/topics_timeline.json?id=5872924533351051492&type=2&feature=hot&locale=1",
+                          @"https://newapi.meipai.com/medias/topics_timeline.json?id=5872239354896137479&type=2&feature=hot&locale=1",
+                          @"https://newapi.meipai.com/medias/topics_timeline.json?id=18&type=1&feature=hot&locale=1",
+                          @"https://newapi.meipai.com/medias/topics_timeline.json?id=5&type=1&feature=hot&locale=1",nil];
+    }
+    
+    return _cateLinkArray;
+}
+
+- (NSArray*)cateArray
+{
+    if (!_cateArray) {
+        _cateArray = [[NSArray alloc] initWithObjects:@"搞笑", @"逗比", @"舞蹈", @"宝宝", @"涨姿势", nil];
+    }
+    
+    return _cateArray;
+}
+
+- (NSMutableArray *)collectArray
+{
+    if (!_collectArray)
+    {
+        
+        _collectArray = [[NSMutableArray alloc] initWithCapacity:2];
+        for (int i = 0; i < self.cateArray.count; i++)
+        {
+            LXHotCollectView *collectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 70, kScreenWidth, kScreenHeight - 70 - 40)];
+            collectView.dataUrl = self.cateLinkArray[i];
+            
+            [_collectArray addObject:collectView];
+        }
+        
+    }
+    
+    return _collectArray;
+}
+
+
+
 -(void)LXSegmentControl:(LXSegmentControl *)segment didSelectItemAtIndex:(NSInteger)index
 {
-    switch (index) {
-        case 0:
+   for (int i = 0;  i < self.collectArray.count; i++)
+    {
+        LXHotCollectView *collectView = self.collectArray[i];
+        if (index == i)
         {
-            break;
+            collectView.hidden = NO;
         }
-        case 1:
+        else
         {
-            break;
+            collectView.hidden = YES;
         }
-        case 2:
-        {
-            break;
-        }
-            
-        default:
-            break;
     }
 }
 
 -(LXSegmentControl *)segment
 {
     if (!_segment) {
-        _segment = [[LXSegmentControl alloc] initWithFrame:CGRectMake(25, 20, [UIScreen mainScreen].bounds.size.width-50, 30)];
+        _segment = [[LXSegmentControl alloc] initWithFrame:CGRectMake(25, 30, [UIScreen mainScreen].bounds.size.width-50, 30)];
         
         _segment.delegate = self;
-        _segment.buttons = @[@"搞笑", @"逗比", @"舞蹈", @"宝宝", @"涨姿势"];
+        _segment.buttons = self.cateArray;
         [_segment setSliderColor:LXColor(253.0/255, 189.0/255, 10.0/255)];
         [_segment setFont:[UIFont systemFontOfSize:15]];
         [_segment setBackgroundColor:[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.5]];
@@ -67,6 +108,18 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:self.segment];
+    
+    for (int i = 0; i < self.collectArray.count; i ++) {
+        LXHotCollectView *collectView = self.collectArray[i];
+        [self.view addSubview:collectView];
+        [collectView refresh];
+        collectView.hidden = YES;
+    }
+    
+    self.segment.selected = 0;
+    LXHotCollectView *collectView = self.collectArray[0];
+    collectView.hidden = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning {
