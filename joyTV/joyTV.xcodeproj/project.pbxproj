@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		1FD944A68DF532B18818DA32 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CBF2F0F98D46F64C66715DB /* libPods.a */; };
+		3F0BFFBC1B625D17008C2219 /* LXDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0BFFBB1B625D17008C2219 /* LXDetailViewController.m */; };
+		3F0BFFC01B62720B008C2219 /* LXDtViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F0BFFBE1B62720B008C2219 /* LXDtViewController.m */; };
+		3F0BFFC11B62720B008C2219 /* LXDtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F0BFFBF1B62720B008C2219 /* LXDtViewController.xib */; };
+		3F0BFFC41B627C8A008C2219 /* love.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0BFFC31B627C8A008C2219 /* love.png */; };
+		3F0BFFC61B628853008C2219 /* talk.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0BFFC51B628853008C2219 /* talk.png */; };
 		3F43094D1B5F3A280064A43D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F43094C1B5F3A280064A43D /* main.m */; };
 		3F4309581B5F3A280064A43D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F4309571B5F3A280064A43D /* Images.xcassets */; };
 		3F43095B1B5F3A280064A43D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F4309591B5F3A280064A43D /* LaunchScreen.xib */; };
@@ -20,6 +25,11 @@
 		3F5C67311B5F74BB0027BC1B /* LXNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C67301B5F74BB0027BC1B /* LXNavigationController.m */; };
 		3F5C67351B5F75D20027BC1B /* owner.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5C67341B5F75D20027BC1B /* owner.png */; };
 		3F66DBD61B5FC8D700FD510E /* LXSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F66DBD51B5FC8D700FD510E /* LXSegmentedControl.m */; };
+		3F784D561B649CA400F5FA7B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F784D551B649CA400F5FA7B /* AVFoundation.framework */; };
+		3F784D581B649CB700F5FA7B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F784D571B649CB700F5FA7B /* MediaPlayer.framework */; };
+		3F784D5A1B64B60D00F5FA7B /* aaa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3F784D591B64B60D00F5FA7B /* aaa.mp4 */; };
+		3F784D5D1B64C7BD00F5FA7B /* LXPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F784D5C1B64C7BD00F5FA7B /* LXPlayerView.m */; };
+		3F784D601B64C8B200F5FA7B /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F784D5F1B64C8B200F5FA7B /* PlayerView.m */; };
 		3FAAB58A1B607E61006656FA /* LXSegmentControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB5891B607E61006656FA /* LXSegmentControl.m */; };
 		3FAAB5971B608C87006656FA /* LXHotCollectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB5961B608C87006656FA /* LXHotCollectView.m */; };
 		3FAAB59A1B60C6EC006656FA /* LXMovieModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB5991B60C6EC006656FA /* LXMovieModel.m */; };
@@ -40,6 +50,13 @@
 
 /* Begin PBXFileReference section */
 		0CBF2F0F98D46F64C66715DB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F0BFFBA1B625D17008C2219 /* LXDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXDetailViewController.h; sourceTree = "<group>"; };
+		3F0BFFBB1B625D17008C2219 /* LXDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXDetailViewController.m; sourceTree = "<group>"; };
+		3F0BFFBD1B62720B008C2219 /* LXDtViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXDtViewController.h; sourceTree = "<group>"; };
+		3F0BFFBE1B62720B008C2219 /* LXDtViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXDtViewController.m; sourceTree = "<group>"; };
+		3F0BFFBF1B62720B008C2219 /* LXDtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LXDtViewController.xib; sourceTree = "<group>"; };
+		3F0BFFC31B627C8A008C2219 /* love.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = love.png; sourceTree = "<group>"; };
+		3F0BFFC51B628853008C2219 /* talk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talk.png; sourceTree = "<group>"; };
 		3F4309471B5F3A280064A43D /* joyTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = joyTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F43094B1B5F3A280064A43D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F43094C1B5F3A280064A43D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -63,6 +80,13 @@
 		3F5C67341B5F75D20027BC1B /* owner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owner.png; sourceTree = "<group>"; };
 		3F66DBD41B5FC8D700FD510E /* LXSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXSegmentedControl.h; sourceTree = "<group>"; };
 		3F66DBD51B5FC8D700FD510E /* LXSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXSegmentedControl.m; sourceTree = "<group>"; };
+		3F784D551B649CA400F5FA7B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3F784D571B649CB700F5FA7B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		3F784D591B64B60D00F5FA7B /* aaa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = aaa.mp4; sourceTree = "<group>"; };
+		3F784D5B1B64C7BD00F5FA7B /* LXPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXPlayerView.h; sourceTree = "<group>"; };
+		3F784D5C1B64C7BD00F5FA7B /* LXPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXPlayerView.m; sourceTree = "<group>"; };
+		3F784D5E1B64C8B200F5FA7B /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
+		3F784D5F1B64C8B200F5FA7B /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
 		3FAAB5881B607E61006656FA /* LXSegmentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXSegmentControl.h; sourceTree = "<group>"; };
 		3FAAB5891B607E61006656FA /* LXSegmentControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXSegmentControl.m; sourceTree = "<group>"; };
 		3FAAB5951B608C87006656FA /* LXHotCollectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXHotCollectView.h; sourceTree = "<group>"; };
@@ -83,6 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F784D581B649CB700F5FA7B /* MediaPlayer.framework in Frameworks */,
+				3F784D561B649CA400F5FA7B /* AVFoundation.framework in Frameworks */,
 				1FD944A68DF532B18818DA32 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F0BFFC21B627C8A008C2219 /* DetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				3F0BFFC51B628853008C2219 /* talk.png */,
+				3F0BFFC31B627C8A008C2219 /* love.png */,
+			);
+			path = DetailVC;
+			sourceTree = "<group>";
+		};
 		3F43093E1B5F3A280064A43D = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +211,11 @@
 				3F5C67201B5F72880027BC1B /* LXIndexViewController.m */,
 				3F5C67221B5F72C50027BC1B /* LXHotViewController.h */,
 				3F5C67231B5F72C50027BC1B /* LXHotViewController.m */,
+				3F0BFFBA1B625D17008C2219 /* LXDetailViewController.h */,
+				3F0BFFBB1B625D17008C2219 /* LXDetailViewController.m */,
+				3F0BFFBD1B62720B008C2219 /* LXDtViewController.h */,
+				3F0BFFBE1B62720B008C2219 /* LXDtViewController.m */,
+				3F0BFFBF1B62720B008C2219 /* LXDtViewController.xib */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -217,6 +257,8 @@
 		3F5C67321B5F75D20027BC1B /* image */ = {
 			isa = PBXGroup;
 			children = (
+				3F784D591B64B60D00F5FA7B /* aaa.mp4 */,
+				3F0BFFC21B627C8A008C2219 /* DetailVC */,
 				3F5C67331B5F75D20027BC1B /* tabbar */,
 			);
 			path = image;
@@ -242,11 +284,15 @@
 		3FAAB5941B608C87006656FA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3F784D5E1B64C8B200F5FA7B /* PlayerView.h */,
+				3F784D5F1B64C8B200F5FA7B /* PlayerView.m */,
 				3FAAB5951B608C87006656FA /* LXHotCollectView.h */,
 				3FAAB5961B608C87006656FA /* LXHotCollectView.m */,
 				3FAAB5A11B60D951006656FA /* LXHotCollectionViewCell.h */,
 				3FAAB5A21B60D951006656FA /* LXHotCollectionViewCell.m */,
 				3FAAB5A31B60D951006656FA /* LXHotCollectionViewCell.xib */,
+				3F784D5B1B64C7BD00F5FA7B /* LXPlayerView.h */,
+				3F784D5C1B64C7BD00F5FA7B /* LXPlayerView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -263,6 +309,8 @@
 		F6EF1F50D19D3081BF06A2E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F784D571B649CB700F5FA7B /* MediaPlayer.framework */,
+				3F784D551B649CA400F5FA7B /* AVFoundation.framework */,
 				0CBF2F0F98D46F64C66715DB /* libPods.a */,
 			);
 			name = Frameworks;
@@ -351,10 +399,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F0BFFC61B628853008C2219 /* talk.png in Resources */,
+				3F784D5A1B64B60D00F5FA7B /* aaa.mp4 in Resources */,
+				3F0BFFC11B62720B008C2219 /* LXDtViewController.xib in Resources */,
 				3F43095B1B5F3A280064A43D /* LaunchScreen.xib in Resources */,
 				3F5C67351B5F75D20027BC1B /* owner.png in Resources */,
 				3FAAB5A51B60D951006656FA /* LXHotCollectionViewCell.xib in Resources */,
 				3F4309581B5F3A280064A43D /* Images.xcassets in Resources */,
+				3F0BFFC41B627C8A008C2219 /* love.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,13 +462,17 @@
 				3FAAB58A1B607E61006656FA /* LXSegmentControl.m in Sources */,
 				3F5C671E1B5F722F0027BC1B /* LXOwnerViewController.m in Sources */,
 				3F5C67311B5F74BB0027BC1B /* LXNavigationController.m in Sources */,
+				3F784D5D1B64C7BD00F5FA7B /* LXPlayerView.m in Sources */,
 				3F5C67181B5F71A30027BC1B /* AppDelegate.m in Sources */,
 				3F43094D1B5F3A280064A43D /* main.m in Sources */,
 				3FAAB5A41B60D951006656FA /* LXHotCollectionViewCell.m in Sources */,
 				3F5C67241B5F72C50027BC1B /* LXHotViewController.m in Sources */,
+				3F0BFFC01B62720B008C2219 /* LXDtViewController.m in Sources */,
+				3F0BFFBC1B625D17008C2219 /* LXDetailViewController.m in Sources */,
 				3FAAB59A1B60C6EC006656FA /* LXMovieModel.m in Sources */,
 				3F5C672B1B5F74500027BC1B /* LXTabBarController.m in Sources */,
 				3FAAB59D1B60D405006656FA /* LXUser.m in Sources */,
+				3F784D601B64C8B200F5FA7B /* PlayerView.m in Sources */,
 				3F66DBD61B5FC8D700FD510E /* LXSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

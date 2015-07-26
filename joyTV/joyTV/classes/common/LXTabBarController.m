@@ -28,12 +28,15 @@
     [super viewDidLoad];
     
     LXHotViewController *hotVc = [[LXHotViewController alloc] init];
+    hotVc.navigationController.navigationBar.translucent = YES;
     [self addChildVc:hotVc title:@"精 选" image:nil selectedImage:nil];
     
     LXOwnerViewController *ownerVc = [[LXOwnerViewController alloc] init];
+    ownerVc.navigationController.navigationBar.translucent = YES;
     [self addChildVc:ownerVc title:@"我 的" image:nil selectedImage:nil];
     
     LXIndexViewController *indexVc = [[LXIndexViewController alloc] init];
+    indexVc.navigationController.navigationBar.translucent = YES;
     [self addChildVc:indexVc title:@"首  页" image:nil selectedImage:nil];
     
 }

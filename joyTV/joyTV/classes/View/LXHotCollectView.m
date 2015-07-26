@@ -13,6 +13,8 @@
 #import "LXUser.h"
 #import "LXMovieModel.h"
 
+#import "AFNetworking.h"
+
 #define kSpacing 2
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -22,6 +24,7 @@
 @property (nonatomic, strong) NSMutableArray *modelArray;
 @property (nonatomic, assign) BOOL isUpLoading;
 @property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *httpManager;
 
 @end
 
@@ -29,7 +32,7 @@
 
 -(void)refresh
 {
-    [self reloadMoreData];
+    [self reloadMoreData1];
 }
 
 -(NSMutableArray *)modelArray
@@ -59,6 +62,8 @@
         _collectView.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
         _collectView.delegate = self;
         _collectView.dataSource = self;
+        _collectView.showsHorizontalScrollIndicator = NO;
+        _collectView.showsVerticalScrollIndicator = NO;
         [self addSubview:_collectView];
         
         UINib *nib = [UINib nibWithNibName:@"LXHotCollectionViewCell" bundle:nil];
@@ -106,7 +111,7 @@
     }
     
     
-    return CGSizeMake(itemWidt, itemWidt + 35 + 30);
+    return CGSizeMake(itemWidt, itemWidt + 35 + 25);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -116,12 +121,37 @@
         
         NSLog(@"-----------------------------------正在更新数据,当前总共有%ld--%ld", self.modelArray.count, indexPath.row);
         self.isUpLoading = YES;
-        [self reloadMoreData];
+        [self reloadMoreData1];
     }
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    LXMovieModel *model = self.modelArray[indexPath.row];
+    
+    if (self.delegate != nil && [self.delegate respondsToSelector:@selector(LXHotCollectView:didSelectIndexPath:movieModel:)]) {
+        [self.delegate LXHotCollectView:self didSelectIndexPath:indexPath movieModel:model];
+    }
+    
+    NSLog(@"%@", model.recommend_caption);
+}
+
+
+
+
 - (void)reloadMoreData
 {
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    if (manager.isReachable)
+    {
+        NSLog(@"当前***********有网络");
+    }
+    else
+    {
+        NSLog(@"当前************没有网络");
+    }
+    
+    
     NSString *urlString = [NSString stringWithFormat:@"%@&page=%ld", self.dataUrl, (long)self.page];
     NSURL *url = [NSURL URLWithString:urlString];
     NSURLRequest *requset = [NSURLRequest requestWithURL:url];
@@ -129,6 +159,7 @@
     __block typeof(self) weakSelf = self;
     [NSURLConnection sendAsynchronousRequest:requset queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (data == nil || data.length == 0) {
+            weakSelf.isUpLoading = NO;
             return ;
         }
         
@@ -150,6 +181,75 @@
         
     }];
 }
+
+- (void)reloadMoreData1
+{
+    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
+    if (manager.isReachable)
+    {
+        NSLog(@"当前***********有网络");
+    }
+    else
+    {
+        NSLog(@"当前************没有网络");
+    }
+    
+    self.httpManager = [AFHTTPRequestOperationManager manager];
+//    if ([httpManager.reachabilityManager isReachable])
+//    {
+//        NSLog(@"当前***********有网络");
+//    }
+//    else
+//    {
+//        NSLog(@"当前************没有网络");
+//    }
+    
+    
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@&page=%ld", self.dataUrl, (long)self.page];
+    
+    __block typeof(self) weakSelf = self;
+    self.httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [self.httpManager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"数据请求成功");
+        
+        NSData *data = responseObject;
+        if (data == nil || data.length == 0) {
+            return ;
+        }
+        
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+        //        NSLog(@"%@", array);
+        for (NSDictionary *dict in array) {
+            LXMovieModel *model = [[LXMovieModel alloc] init];
+            model.recommend_caption = dict[@"recommend_caption"];
+            NSDictionary *mediaDict = dict[@"media"];
+            [model setValuesForKeysWithDictionary:mediaDict];
+            
+            [weakSelf.modelArray addObject:model];
+            
+        }
+        
+        weakSelf.page += 1;
+        [weakSelf.collectView reloadData];
+        weakSelf.isUpLoading = NO;
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        weakSelf.isUpLoading = NO;
+        NSLog(@"数据请求失败");
+    } ];
+}
+
+
+
+
+-(void)dealloc
+{
+    [self.httpManager.operationQueue cancelAllOperations];
+}
+
+
 
 
 /*

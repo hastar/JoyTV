@@ -19,6 +19,8 @@
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *ID;
 @property (nonatomic, strong) NSString *likes_count;
+@property (nonatomic, strong) NSString *comments_count;
+@property (nonatomic, strong) NSString *created_at;
 @property (nonatomic, strong) LXUser *user;
 
 @end

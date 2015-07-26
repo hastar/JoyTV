@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LXTabBarController.h"
 
+#import "AFNetworking.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -46,10 +47,11 @@
     [[UITabBarItem appearance] setTitleTextAttributes:selectTextAttrs forState:UIControlStateSelected];
     [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0, -15.0)];
     
-    
-    
     [self.window makeKeyAndVisible];
     
+    
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[AFNetworkReachabilityManager sharedManager] isReachable];
     
     return YES;
 }

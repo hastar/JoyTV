@@ -9,11 +9,13 @@
 #import "LXHotViewController.h"
 #import "LXSegmentControl.h"
 #import "LXHotCollectView.h"
+#import "LXDetailViewController.h"
+#import "LXDtViewController.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define LXColor(r, g, b) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:1.0]
-@interface LXHotViewController () <LXSegmentControlDelegate>
+@interface LXHotViewController () <LXSegmentControlDelegate, LXHotCollectViewDelegate>
 
 @property (nonatomic, strong) LXSegmentControl *segment;
 @property (nonatomic, strong) LXHotCollectView *hotCollectView;
@@ -46,6 +48,7 @@
 {
     if (!_hotCollectView) {
         _hotCollectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 70, kScreenWidth, kScreenHeight - 70 - 40)];
+        _hotCollectView.delegate = self;
         _hotCollectView.dataUrl = @"https://newapi.meipai.com/hot/feed_timeline.json?locale=1&";
     }
     
@@ -56,6 +59,7 @@
 {
     if (!_newCollectView) {
         _newCollectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 70, kScreenWidth, kScreenHeight - 70 - 40)];
+        _newCollectView.delegate = self;
         _newCollectView.dataUrl = @"https://newapi.meipai.com/medias/topics_timeline.json?id=22&type=1&feature=new&locale=1";
     }
     
@@ -98,6 +102,19 @@
             break;
     }
 }
+
+-(void)LXHotCollectView:(LXHotCollectView *)collectView didSelectIndexPath:(NSIndexPath *)indexPath movieModel:(LXMovieModel *)movieModel
+{
+    
+    NSLog(@"video URL = %@, time = %@", movieModel.video, movieModel.created_at);
+    
+    LXDtViewController *dtVc = [[LXDtViewController alloc] init];
+    dtVc.model = movieModel;
+    
+    [self.navigationController pushViewController:dtVc animated:YES];
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

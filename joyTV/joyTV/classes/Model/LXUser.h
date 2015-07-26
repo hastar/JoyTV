@@ -14,5 +14,6 @@
 @property (nonatomic, strong) NSString *avatar;
 @property (nonatomic, strong) NSString *screen_name;
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString *be_liked_count;
 
 @end

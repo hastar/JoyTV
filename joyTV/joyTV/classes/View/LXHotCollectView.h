@@ -7,11 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LXMovieModel.h"
+
+
+@class LXHotCollectView;
+@protocol LXHotCollectViewDelegate <NSObject>
+
+- (void)LXHotCollectView:(LXHotCollectView *)collectView didSelectIndexPath:(NSIndexPath *)indexPath movieModel:(LXMovieModel *)movieModel;
+
+@end
 
 @interface LXHotCollectView : UIView
 
 @property (nonatomic, strong) NSString *dataUrl;
-
+@property (nonatomic, assign) id<LXHotCollectViewDelegate> delegate;
 
 - (void)refresh;
+
 @end
