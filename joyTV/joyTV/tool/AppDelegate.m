@@ -9,11 +9,12 @@
 #import "AppDelegate.h"
 #import "LXTabBarController.h"
 
+#import "UMSocial.h"
 #import "AFNetworking.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
-#define LXColor(r, g, b) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:1.0]
+#define LXColor(r, g, b, a) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:(a)]
 @interface AppDelegate ()
 
 @end
@@ -42,7 +43,7 @@
     textAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
     NSMutableDictionary *selectTextAttrs = [NSMutableDictionary dictionary];
     selectTextAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:18];
-    selectTextAttrs[NSForegroundColorAttributeName] = [UIColor yellowColor];
+    selectTextAttrs[NSForegroundColorAttributeName] = LXColor(253.0/255, 189.0/255, 10.0/255, 1.0);
     [[UITabBarItem appearance] setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:selectTextAttrs forState:UIControlStateSelected];
     [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0, -15.0)];
@@ -51,7 +52,8 @@
     
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    [[AFNetworkReachabilityManager sharedManager] isReachable];
+    
+    [UMSocialData setAppKey:@"	55b6157ee0f55a8006000d14"];
     
     return YES;
 }

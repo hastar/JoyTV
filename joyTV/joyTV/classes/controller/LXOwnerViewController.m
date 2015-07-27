@@ -9,23 +9,66 @@
 
 #import "LXOwnerViewController.h"
 
-@interface LXOwnerViewController ()
+
+#define LXColor(r, g, b, a) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:(a)]
+
+@interface LXOwnerViewController ()<UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
 @implementation LXOwnerViewController
 
+
+- (UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+    }
+    
+    return _tableView;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.view.backgroundColor = [UIColor redColor];
-    
+    self.navigationController.navigationBar.tintColor = LXColor(253.0/255, 189.0/255, 10.0/255, 1.0);
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:LXColor(253.0/255, 189.0/255, 10.0/255, 1.0)}];
 
-
-    
+    [self.view addSubview:self.tableView];
     
     
 }
+
+#pragma mark tableView代理方法
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 0;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *strID = @"cellID";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:strID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:strID];
+    }
+    
+    return cell;
+}
+
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

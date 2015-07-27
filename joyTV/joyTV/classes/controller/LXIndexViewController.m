@@ -9,13 +9,14 @@
 #import "LXIndexViewController.h"
 #import "LXSegmentControl.h"
 #import "LXHotCollectView.h"
+#import "LXDtViewController.h"
 
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define LXColor(r, g, b) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:1.0]
 
-@interface LXIndexViewController () <LXSegmentControlDelegate>
+@interface LXIndexViewController () <LXSegmentControlDelegate, LXHotCollectViewDelegate>
 
 @property (nonatomic, strong) NSArray *cateArray;
 @property (nonatomic, strong) NSArray *cateLinkArray;
@@ -57,6 +58,7 @@
         for (int i = 0; i < self.cateArray.count; i++)
         {
             LXHotCollectView *collectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 70, kScreenWidth, kScreenHeight - 70 - 40)];
+            collectView.delegate = self;
             collectView.dataUrl = self.cateLinkArray[i];
             
             [_collectArray addObject:collectView];
@@ -121,6 +123,17 @@
     collectView.hidden = NO;
     
 }
+
+
+-(void)LXHotCollectView:(LXHotCollectView *)collectView didSelectIndexPath:(NSIndexPath *)indexPath movieModel:(LXMovieModel *)movieModel
+{
+    LXDtViewController *dtVc = [[LXDtViewController alloc] init];
+    dtVc.model = movieModel;
+    
+    [self.navigationController pushViewController:dtVc animated:YES];
+
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

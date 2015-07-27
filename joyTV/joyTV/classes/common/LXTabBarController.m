@@ -32,8 +32,8 @@
     [self addChildVc:hotVc title:@"精 选" image:nil selectedImage:nil];
     
     LXOwnerViewController *ownerVc = [[LXOwnerViewController alloc] init];
-    ownerVc.navigationController.navigationBar.translucent = YES;
     [self addChildVc:ownerVc title:@"我 的" image:nil selectedImage:nil];
+    ownerVc.navigationController.navigationBarHidden = NO;
     
     LXIndexViewController *indexVc = [[LXIndexViewController alloc] init];
     indexVc.navigationController.navigationBar.translucent = YES;

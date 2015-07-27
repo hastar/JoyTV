@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @class LXPlayerView;
 @protocol LXPlayerViewDelegate <NSObject>
@@ -44,8 +45,10 @@
 
 @end
 
+
 @interface LXPlayerView : UIView
 
+@property (nonatomic ,strong) AVPlayer *player;
 @property (nonatomic, assign) id<LXPlayerViewDelegate> delegate;
 
 /**

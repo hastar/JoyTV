@@ -9,12 +9,11 @@
 #import "LXHotViewController.h"
 #import "LXSegmentControl.h"
 #import "LXHotCollectView.h"
-#import "LXDetailViewController.h"
 #import "LXDtViewController.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
-#define LXColor(r, g, b) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:1.0]
+#define LXColor(r, g, b, a) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:(a)]
 @interface LXHotViewController () <LXSegmentControlDelegate, LXHotCollectViewDelegate>
 
 @property (nonatomic, strong) LXSegmentControl *segment;
@@ -33,9 +32,9 @@
         
         _segment.delegate = self;
         _segment.buttons = @[@"最  新", @"热  门"];
-        [_segment setSliderColor:LXColor(253.0/255, 189.0/255, 10.0/255)];
+        [_segment setSliderColor:LXColor(253.0/255, 189.0/255, 10.0/255, 1.0)];
         [_segment setFont:[UIFont systemFontOfSize:20]];
-        [_segment setBackgroundColor:[UIColor colorWithRed:0.99 green:0.99 blue:0.99 alpha:1.0]];
+        [_segment setBackgroundColor:LXColor(0.99, 0.99, 0.99, 1.0)];
         [_segment setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [_segment setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
 

@@ -12,45 +12,62 @@
 #import "LXPlayerView.h"
 #import "LXMovieModel.h"
 
+#import "UMSocial.h"
 #import <AVFoundation/AVFoundation.h>
-@interface LXDtViewController ()<LXPlayerViewDelegate>
+@interface LXDtViewController ()<LXPlayerViewDelegate, UMSocialUIDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *headerImage;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userTime;
 @property (weak, nonatomic) IBOutlet UILabel *userVideoCount;
 @property (weak, nonatomic) IBOutlet LXPlayerView *videoView;
-@property (weak, nonatomic) IBOutlet UIScrollView *desScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *loveCount;
-@property (weak, nonatomic) IBOutlet UILabel *talkCount;
 
 @property (weak, nonatomic) IBOutlet UILabel *desLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalTime;
+@property (weak, nonatomic) IBOutlet UILabel *currentTime;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
+//转发/分享
+- (IBAction)share:(id)sender;
+//收藏
 - (IBAction)collection:(id)sender;
 
 @end
 
 @implementation LXDtViewController
 
-- (UILabel *)desLabel
-{
-    if (!_desLabel) {
-        _desLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, [UIScreen mainScreen].bounds.size.width - 10, 0)];
-    }
-    
-    return _desLabel;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.videoView.delegate = self;
-    self.desScrollView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.98];
     
     self.desLabel.numberOfLines = 0;
-//    self.desLabel.backgroundColor = [UIColor cyanColor];
-    [self.desScrollView addSubview:self.desLabel];
-    self.desScrollView.contentSize = CGSizeMake(self.desLabel.bounds.size.width, self.desLabel.bounds.size.height);
+    self.progressView.progress = 0.0;
     
+    if (self.model) {
+        [self.headerImage sd_setImageWithURL:[NSURL URLWithString:self.model.user.avatar]];
+        NSLog(@"%@", self.model.user.avatar);
+        self.headerImage.layer.cornerRadius = self.headerImage.bounds.size.height/2;
+        self.headerImage.layer.masksToBounds = YES;
+        self.headerImage.clipsToBounds = YES;
+        
+        self.userName.text = self.model.user.screen_name;
+        self.userTime.text = self.model.created_at;
+        self.userVideoCount.text = self.model.user.be_liked_count;
+        
+        self.loveCount.text = self.model.likes_count;
+        [self setDescText:self.model.caption];
+        
+        
+        
+        self.tabBarController.tabBar.hidden = YES;
+        self.navigationController.navigationBarHidden = NO;
+        
+        
+        [self.videoView startPlayUrl:self.model.video];
+        
+        [self.view bringSubviewToFront:[self.view viewWithTag:521]];
+    }
     
 }
 
@@ -71,33 +88,12 @@
         frame.size.height += 15;
     }
     self.desLabel.frame = frame;
-    self.desScrollView.contentSize = CGSizeMake(frame.size.width-2, frame.size.height);
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if (self.model) {
-        [self.headerImage sd_setImageWithURL:[NSURL URLWithString:self.model.user.avatar]];
-        NSLog(@"%@", self.model.user.avatar);
-        self.headerImage.layer.cornerRadius = self.headerImage.bounds.size.height/2;
-        self.headerImage.layer.masksToBounds = YES;
-        self.headerImage.clipsToBounds = YES;
-        
-        self.userName.text = self.model.user.screen_name;
-        self.userTime.text = self.model.created_at;
-        self.userVideoCount.text = self.model.user.be_liked_count;
-        
-        [self setDescText:self.model.caption];
-        
-        
-        
-        self.tabBarController.tabBar.hidden = YES;
-        self.navigationController.navigationBarHidden = NO;
-        
-        
-        [self.videoView startPlayUrl:self.model.video];
-
-    }
+    self.navigationController.navigationBarHidden = NO;
+    self.tabBarController.tabBar.hidden = YES;
     
 }
 
@@ -110,12 +106,26 @@
     [self.videoView stopPlayer];
 }
 
+-(void)LXPlayerViewDidEndPlay:(LXPlayerView *)playView
+{
+    [playView reStart];
+}
+
 
 -(void)LXPlayerView:(LXPlayerView *)playerView current:(CGFloat)currentSecond total:(CGFloat)totalSecond
 {
     NSString *currentTime = [self convertTime:currentSecond];
     NSString *totalTime = [self convertTime:totalSecond];
     NSLog(@"current time is %@/%@", currentTime, totalTime);
+    self.currentTime.text = currentTime;
+    self.totalTime.text = totalTime;
+    self.progressView.progress = currentSecond/totalSecond;
+    
+    if (currentSecond + 1.5 > totalSecond) {
+        [playerView reStart];
+    }
+    
+    
 }
 
 
@@ -140,6 +150,39 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)share:(id)sender {
+    
+    [self.videoView.player pause];
+    NSMutableString *shareString = [[NSMutableString alloc] init];
+    [shareString appendString:self.model.caption];
+    [shareString appendString:@"\n"];
+    [shareString appendString:self.model.url];
+    
+    
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:nil
+                                      shareText:shareString
+                                     shareImage:nil
+                                shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren,nil]
+                                       delegate:self];
+
+//    [self.videoView reStart];
+    
+}
+
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    //根据`responseCode`得到发送结果,如果分享成功
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        //得到分享到的微博平台名
+        NSLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
+    }
+    
+    [self.videoView.player play];
+}
+
 
 - (IBAction)collection:(id)sender {
 }

@@ -195,14 +195,6 @@
     }
     
     self.httpManager = [AFHTTPRequestOperationManager manager];
-//    if ([httpManager.reachabilityManager isReachable])
-//    {
-//        NSLog(@"当前***********有网络");
-//    }
-//    else
-//    {
-//        NSLog(@"当前************没有网络");
-//    }
     
     
     

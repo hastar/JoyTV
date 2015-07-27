@@ -8,7 +8,7 @@
 
 #import "LXPlayerView.h"
 #import "PlayerView.h"
-#import <AVFoundation/AVFoundation.h>
+
 
 
 @interface LXPlayerView () {
@@ -17,7 +17,7 @@
     NSDateFormatter *_dateFormatter;
 }
 
-@property (nonatomic ,strong) AVPlayer *player;
+
 @property (nonatomic ,strong) AVPlayerItem *playerItem;
 @property (nonatomic ,strong) id playbackTimeObserver;
 
@@ -30,7 +30,15 @@
 {
     if (self.player) {
         [self.player pause];
-        [self.player play];
+        
+        __block typeof(self) weakSelf = self;
+        [self.player seekToTime:kCMTimeZero completionHandler:^(BOOL finished) {
+            
+            [weakSelf.player play];
+            
+        }];
+        
+        
     }
 }
 
@@ -53,11 +61,7 @@
 }
 
 -(void)stopPlayer
-{    
-    [self.playerItem removeObserver:self forKeyPath:@"status" context:nil];
-    [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
-    [self.player removeTimeObserver:self.playbackTimeObserver];
+{
     [self.player pause];
 }
 
@@ -68,8 +72,7 @@
     self.playbackTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) {
         CGFloat currentSecond = playerItem.currentTime.value/playerItem.currentTime.timescale;// 计算当前在第几秒
         CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;
-//        NSString *timeString = [weakSelf convertTime:currentSecond];
-//        NSLog(@"current time is %@/%@",timeString,_totalTime);
+        
         
         if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(LXPlayerView:current:total:)]) {
             [weakSelf.delegate LXPlayerView:weakSelf current:currentSecond total:totalSecond];
@@ -164,6 +167,11 @@
     
     self.delegate = nil;
     [self.player pause];
+    
+    [self.playerItem removeObserver:self forKeyPath:@"status" context:nil];
+    [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
+    [self.player removeTimeObserver:self.playbackTimeObserver];
 }
 
 
