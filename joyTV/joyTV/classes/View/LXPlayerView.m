@@ -26,6 +26,13 @@
 
 @implementation LXPlayerView
 
+- (void)reStart
+{
+    if (self.player) {
+        [self.player pause];
+        [self.player play];
+    }
+}
 
 - (void)startPlayUrl:(NSString *)videoUrl
 {
@@ -61,11 +68,11 @@
     self.playbackTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:NULL usingBlock:^(CMTime time) {
         CGFloat currentSecond = playerItem.currentTime.value/playerItem.currentTime.timescale;// 计算当前在第几秒
         CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;
-        NSString *timeString = [weakSelf convertTime:currentSecond];
-        NSLog(@"current time is %@/%@",timeString,_totalTime);
+//        NSString *timeString = [weakSelf convertTime:currentSecond];
+//        NSLog(@"current time is %@/%@",timeString,_totalTime);
         
-        if (!self.delegate && [self.delegate respondsToSelector:@selector(LXPlayerView:current:total:)]) {
-            [self.delegate LXPlayerView:self current:currentSecond total:totalSecond];
+        if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(LXPlayerView:current:total:)]) {
+            [weakSelf.delegate LXPlayerView:weakSelf current:currentSecond total:totalSecond];
         }
         
     }];
@@ -83,13 +90,21 @@
             NSLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
             [self monitoringPlayback:self.playerItem];// 监听播放状态
             
+            //数据读取完毕，可以播放
+            if (self.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewWillStartPlay:)]) {
+                [self.delegate LXPlayerView:self readyTototalSecond:totalSecond];
+            }
             
-            if (!self.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewWillStartPlay:)]) {
+            //即将播放
+            if (self.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewWillStartPlay:)]) {
                 [self.delegate LXPlayerViewWillStartPlay:self];
             }
+            
+            //播放
             [self.player play];
             
-            if (!self.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewDidStartPlay:)]) {
+            //已经播放
+            if (self.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewDidStartPlay:)]) {
                 [self.delegate LXPlayerViewDidStartPlay:self];
             }
         } else if ([playerItem status] == AVPlayerStatusFailed) {
@@ -111,7 +126,7 @@
 - (void)moviePlayDidEnd:(NSNotification *)notification {
     NSLog(@"Play end");
     
-    if (!self.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewWillEndPlay:)]) {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewWillEndPlay:)]) {
         [self.delegate LXPlayerViewWillEndPlay:self];
     }
     
@@ -120,7 +135,7 @@
         NSLog(@"已经播放到末尾了");
        
         [weakSelf.player pause];
-        if (!weakSelf.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewDidEndPlay:)]) {
+        if (weakSelf.delegate && [self.delegate respondsToSelector:@selector(LXPlayerViewDidEndPlay:)]) {
             [weakSelf.delegate LXPlayerViewDidEndPlay:self];
         }
         
@@ -146,10 +161,9 @@
 }
 
 - (void)dealloc {
-    [self.playerItem removeObserver:self forKeyPath:@"status" context:nil];
-    [self.playerItem removeObserver:self forKeyPath:@"loadedTimeRanges" context:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
-    [self.player removeTimeObserver:self.playbackTimeObserver];
+    
+    self.delegate = nil;
+    [self.player pause];
 }
 
 

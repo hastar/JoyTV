@@ -13,7 +13,8 @@
 #import "LXMovieModel.h"
 
 #import <AVFoundation/AVFoundation.h>
-@interface LXDtViewController ()
+@interface LXDtViewController ()<LXPlayerViewDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *headerImage;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userTime;
@@ -22,21 +23,55 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *desScrollView;
 @property (weak, nonatomic) IBOutlet UILabel *loveCount;
 @property (weak, nonatomic) IBOutlet UILabel *talkCount;
+
+@property (weak, nonatomic) IBOutlet UILabel *desLabel;
+
 - (IBAction)collection:(id)sender;
 
 @end
 
 @implementation LXDtViewController
 
+- (UILabel *)desLabel
+{
+    if (!_desLabel) {
+        _desLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, [UIScreen mainScreen].bounds.size.width - 10, 0)];
+    }
+    
+    return _desLabel;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.videoView.delegate = self;
+    self.desScrollView.backgroundColor = [UIColor colorWithWhite:1.0 alpha:0.98];
+    
+    self.desLabel.numberOfLines = 0;
+//    self.desLabel.backgroundColor = [UIColor cyanColor];
+    [self.desScrollView addSubview:self.desLabel];
+    self.desScrollView.contentSize = CGSizeMake(self.desLabel.bounds.size.width, self.desLabel.bounds.size.height);
+    
+    
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setDescText:(NSString *)text
+{
+    self.desLabel.text = text;
+    CGRect frame = self.desLabel.frame;
+    CGFloat width = frame.size.width;
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(width - 2, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil];
+    frame.size.height = rect.size.height;
+    if (frame.size.height > 30) {
+        frame.size.height += 15;
+    }
+    self.desLabel.frame = frame;
+    self.desScrollView.contentSize = CGSizeMake(frame.size.width-2, frame.size.height);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -52,26 +87,13 @@
         self.userTime.text = self.model.created_at;
         self.userVideoCount.text = self.model.user.be_liked_count;
         
+        [self setDescText:self.model.caption];
         
-        self.navigationController.navigationBarHidden = NO;
+        
+        
         self.tabBarController.tabBar.hidden = YES;
+        self.navigationController.navigationBarHidden = NO;
         
-//        NSString *filePath = [[NSBundle mainBundle] pathForResource:@"aaa" ofType:@"mp4"];
-//        NSURL *sourceMovieURL = [NSURL fileURLWithPath:filePath];
-//        AVAsset *movieAsset	= [AVURLAsset URLAssetWithURL:sourceMovieURL options:nil];
-//        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:movieAsset];
-//        
-//        //    NSURL *sourceMovieURL = [NSURL URLWithString:self.model.video];
-//        //    AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:sourceMovieURL];
-//        
-//        AVPlayer *player = [AVPlayer playerWithPlayerItem:playerItem];
-//        AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:player];
-//        playerLayer.frame = self.videoView.layer.bounds;
-//        playerLayer.videoGravity = AVLayerVideoGravityResizeAspect;
-//        
-//        [self.videoView.layer addSublayer:playerLayer];
-//        //    [self.view.layer addSublayer:playerLayer];
-//        [player play];
         
         [self.videoView startPlayUrl:self.model.video];
 
@@ -86,6 +108,27 @@
     self.tabBarController.tabBar.hidden = NO;
     
     [self.videoView stopPlayer];
+}
+
+
+-(void)LXPlayerView:(LXPlayerView *)playerView current:(CGFloat)currentSecond total:(CGFloat)totalSecond
+{
+    NSString *currentTime = [self convertTime:currentSecond];
+    NSString *totalTime = [self convertTime:totalSecond];
+    NSLog(@"current time is %@/%@", currentTime, totalTime);
+}
+
+
+- (NSString *)convertTime:(CGFloat)second{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate *d = [NSDate dateWithTimeIntervalSince1970:second];
+    if (second/3600 >= 1) {
+        [dateFormatter setDateFormat:@"HH:mm:ss"];
+    } else {
+        [dateFormatter setDateFormat:@"mm:ss"];
+    }
+    NSString *showtimeNew = [dateFormatter stringFromDate:d];
+    return showtimeNew;
 }
 
 /*

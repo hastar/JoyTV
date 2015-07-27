@@ -11,7 +11,25 @@
 @class LXPlayerView;
 @protocol LXPlayerViewDelegate <NSObject>
 
+@optional
+
+/**
+ *  播放进度实时控制
+ *
+ *  @param playerView    playerView
+ *  @param currentSecond 当前播放到第几秒
+ *  @param totalSecond   总共有多少秒
+ */
 - (void)LXPlayerView:(LXPlayerView *)playerView current:(CGFloat)currentSecond total:(CGFloat)totalSecond;
+
+/**
+ *  开始播放
+ *
+ *  @param playerView  当前对象
+ *  @param totalSecond 总共多少秒
+ */
+- (void)LXPlayerView:(LXPlayerView *)playerView readyTototalSecond:(CGFloat)totalSecond;
+
 
 #pragma mark 即将开始播放
 - (void)LXPlayerViewWillStartPlay:(LXPlayerView *)playerView;
@@ -30,8 +48,21 @@
 
 @property (nonatomic, assign) id<LXPlayerViewDelegate> delegate;
 
+/**
+ *  开始播放指定URL视频
+ *
+ *  @param videoUrl 视频URL地址
+ */
 - (void)startPlayUrl:(NSString *)videoUrl;
 
+/**
+ *  重新播放
+ */
+- (void)reStart;
+
+/**
+ *  停止播放
+ */
 - (void)stopPlayer;
 
 @end
