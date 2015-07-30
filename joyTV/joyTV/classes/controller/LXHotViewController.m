@@ -5,11 +5,17 @@
 //  Created by lanou on 15/7/22.
 //  Copyright (c) 2015年 hastar. All rights reserved.
 //
+#ifdef DEBUG
+#define LXLog(...) NSLog(__VA_ARGS__)
+#else
+#define LXLog(...)
+#endif
 
 #import "LXHotViewController.h"
 #import "LXSegmentControl.h"
 #import "LXHotCollectView.h"
 #import "LXDtViewController.h"
+
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -82,7 +88,7 @@
 
 -(void)LXSegmentControl:(LXSegmentControl *)segment didSelectItemAtIndex:(NSInteger)index
 {
-    NSLog(@"选中------%ld", index);
+    LXLog(@"选中------%ld", index);
     switch (index)
     {
         case 0:
@@ -105,14 +111,19 @@
 -(void)LXHotCollectView:(LXHotCollectView *)collectView didSelectIndexPath:(NSIndexPath *)indexPath movieModel:(LXMovieModel *)movieModel
 {
     
-    NSLog(@"video URL = %@, time = %@", movieModel.video, movieModel.created_at);
+    LXLog(@"video URL = %@, time = %@", movieModel.video, movieModel.created_at);
     
     LXDtViewController *dtVc = [[LXDtViewController alloc] init];
     dtVc.model = movieModel;
     
     [self.navigationController pushViewController:dtVc animated:YES];
+//    
+//    LXDetailViewController *detailVC = [[LXDetailViewController alloc] init];
+//    detailVC.model = movieModel;
+//    [self.navigationController pushViewController:detailVC animated:YES];
     
 }
+
 
 
 - (void)didReceiveMemoryWarning {

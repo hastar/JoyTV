@@ -9,7 +9,9 @@
 #import "AppDelegate.h"
 #import "LXTabBarController.h"
 
+#import "MobClick.h"
 #import "UMSocial.h"
+#import "UMFeedback.h"
 #import "AFNetworking.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -53,8 +55,12 @@
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
-    [UMSocialData setAppKey:@"	55b6157ee0f55a8006000d14"];
+    [MobClick setEncryptEnabled:YES];
+    [MobClick startWithAppkey:@"55b6157ee0f55a8006000d14" reportPolicy:BATCH   channelId:nil];
+    [UMSocialData setAppKey:@"55b6157ee0f55a8006000d14"];
     
+    
+    [NSThread sleepForTimeInterval:1.0];
     return YES;
 }
 

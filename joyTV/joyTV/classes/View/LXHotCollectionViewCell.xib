@@ -65,7 +65,7 @@
                 <outlet property="userImageView" destination="1aC-R1-Xd7" id="1oX-1B-Tha"/>
                 <outlet property="userNameLabel" destination="0F6-ub-Afp" id="36J-dk-vag"/>
             </connections>
-            <point key="canvasLocation" x="390" y="364"/>
+            <point key="canvasLocation" x="-172" y="274"/>
         </collectionViewCell>
     </objects>
 </document>

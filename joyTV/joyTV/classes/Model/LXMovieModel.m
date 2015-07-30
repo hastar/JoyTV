@@ -11,6 +11,47 @@
 #import <UIKit/UIKit.h>
 @implementation LXMovieModel
 
+
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super init];
+    if (self) {
+        self.ID = [coder decodeObjectForKey:@"ID"];
+        self.recommend_caption = [coder decodeObjectForKey:@"recommend_caption"];
+        self.cover_pic = [coder decodeObjectForKey:@"cover_pic"];
+        self.caption = [coder decodeObjectForKey:@"caption"];
+        self.time = [coder decodeObjectForKey:@"time"];
+        self.video = [coder decodeObjectForKey:@"video"];
+        self.url = [coder decodeObjectForKey:@"url"];
+        self.likes_count = [coder decodeObjectForKey:@"likes_count"];
+        self.comments_count = [coder decodeObjectForKey:@"comments_count"];
+        self.created_at = [coder decodeObjectForKey:@"created_at"];
+        self.user = [coder decodeObjectForKey:@"user"];
+    }
+    return self;
+}
+
+
+-(void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.recommend_caption forKey:@"recommend_caption"];
+    [aCoder encodeObject:self.cover_pic forKey:@"cover_pic"];
+    [aCoder encodeObject:self.caption forKey:@"caption"];
+    [aCoder encodeObject:self.time forKey:@"time"];
+    [aCoder encodeObject:self.video forKey:@"video"];
+    [aCoder encodeObject:self.url forKey:@"url"];
+    [aCoder encodeObject:self.ID forKey:@"ID"];
+    [aCoder encodeObject:self.likes_count forKey:@"likes_count"];
+    [aCoder encodeObject:self.comments_count forKey:@"comments_count"];
+    [aCoder encodeObject:self.created_at forKey:@"created_at"];
+    [aCoder encodeObject:self.user forKey:@"user"];
+}
+
+
+
+
+
 -(void)setValue:(id)value forKey:(NSString *)key
 {
     [super setValue:value forKey:key];

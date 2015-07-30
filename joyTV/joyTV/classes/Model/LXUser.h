@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LXUser : NSObject
+@interface LXUser : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *ID;
 @property (nonatomic, strong) NSString *avatar;

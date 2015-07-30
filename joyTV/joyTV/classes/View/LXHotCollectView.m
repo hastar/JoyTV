@@ -5,6 +5,11 @@
 //  Created by lanou on 15/7/23.
 //  Copyright (c) 2015年 hastar. All rights reserved.
 //
+#ifdef DEBUG
+#define LXLog(...) NSLog(__VA_ARGS__)
+#else
+#define LXLog(...)
+#endif
 
 #import "LXHotCollectView.h"
 #import "LXHotCollectionViewCell.h"
@@ -119,7 +124,7 @@
     
     if (!self.isUpLoading && indexPath.row >= self.modelArray.count-5) {
         
-        NSLog(@"-----------------------------------正在更新数据,当前总共有%ld--%ld", self.modelArray.count, indexPath.row);
+        LXLog(@"-----------------------------------正在更新数据,当前总共有%ld--%ld", self.modelArray.count, indexPath.row);
         self.isUpLoading = YES;
         [self reloadMoreData1];
     }
@@ -133,7 +138,7 @@
         [self.delegate LXHotCollectView:self didSelectIndexPath:indexPath movieModel:model];
     }
     
-    NSLog(@"%@", model.recommend_caption);
+    LXLog(@"%@", model.recommend_caption);
 }
 
 
@@ -144,11 +149,11 @@
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
     if (manager.isReachable)
     {
-        NSLog(@"当前***********有网络");
+        LXLog(@"当前***********有网络");
     }
     else
     {
-        NSLog(@"当前************没有网络");
+        LXLog(@"当前************没有网络");
     }
     
     
@@ -164,7 +169,7 @@
         }
         
         NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//        NSLog(@"%@", array);
+//        LXLog(@"%@", array);
         for (NSDictionary *dict in array) {
             LXMovieModel *model = [[LXMovieModel alloc] init];
             model.recommend_caption = dict[@"recommend_caption"];
@@ -187,11 +192,11 @@
     AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
     if (manager.isReachable)
     {
-        NSLog(@"当前***********有网络");
+        LXLog(@"当前***********有网络");
     }
     else
     {
-        NSLog(@"当前************没有网络");
+        LXLog(@"当前************没有网络");
     }
     
     self.httpManager = [AFHTTPRequestOperationManager manager];
@@ -203,7 +208,7 @@
     __block typeof(self) weakSelf = self;
     self.httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [self.httpManager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"数据请求成功");
+        LXLog(@"数据请求成功");
         
         NSData *data = responseObject;
         if (data == nil || data.length == 0) {
@@ -211,7 +216,7 @@
         }
         
         NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        //        NSLog(@"%@", array);
+        //        LXLog(@"%@", array);
         for (NSDictionary *dict in array) {
             LXMovieModel *model = [[LXMovieModel alloc] init];
             model.recommend_caption = dict[@"recommend_caption"];
@@ -229,7 +234,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         weakSelf.isUpLoading = NO;
-        NSLog(@"数据请求失败");
+        LXLog(@"数据请求失败");
     } ];
 }
 

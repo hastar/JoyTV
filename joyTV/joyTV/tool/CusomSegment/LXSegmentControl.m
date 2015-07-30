@@ -5,6 +5,11 @@
 //  Created by lanou on 15/7/22.
 //  Copyright (c) 2015年 hastar. All rights reserved.
 //
+#ifdef DEBUG
+#define LXLog(...) NSLog(__VA_ARGS__)
+#else
+#define LXLog(...)
+#endif
 
 #import "LXSegmentControl.h"
 
@@ -75,7 +80,7 @@
         x += subWidth;
         [self.contentView addSubview:button];
     }
-    NSLog(@"当前选中项:%ld", self.selectedIndex);
+    LXLog(@"当前选中项:%ld", self.selectedIndex);
     
     UIButton *button = (UIButton *)[self.contentView viewWithTag:self.selectedIndex+kTag];
     button.selected = YES;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class LXUser;
-@interface LXMovieModel : NSObject
+@interface LXMovieModel : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *recommend_caption;
 @property (nonatomic, strong) NSString *cover_pic;

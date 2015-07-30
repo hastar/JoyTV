@@ -31,6 +31,22 @@
  */
 - (void)LXPlayerView:(LXPlayerView *)playerView readyTototalSecond:(CGFloat)totalSecond;
 
+/**
+ *  缓冲数据不足
+ *
+ *  @param playerView   当前playerView
+ *  @param loadProgress 当前缓冲进度
+ */
+- (void)LXPlayerView:(LXPlayerView *)playerView loading:(CGFloat)loadProgress;
+
+/**
+ *  数据再次缓冲好乐
+ *
+ *  @param playerView   当前playerView
+ *  @param loadProgress 当前缓冲进度
+ */
+- (void)LXPlayerView:(LXPlayerView *)playerView loaded:(CGFloat)loadProgress;
+
 
 #pragma mark 即将开始播放
 - (void)LXPlayerViewWillStartPlay:(LXPlayerView *)playerView;
