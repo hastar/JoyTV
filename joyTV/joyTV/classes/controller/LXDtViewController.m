@@ -27,19 +27,17 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 @interface LXDtViewController ()<LXPlayerViewDelegate, UMSocialUIDelegate>
 
-@property (weak, nonatomic) IBOutlet UIImageView *headerImage;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 @property (weak, nonatomic) IBOutlet UILabel *userTime;
 @property (weak, nonatomic) IBOutlet UILabel *userVideoCount;
-@property (weak, nonatomic) IBOutlet LXPlayerView *videoView;
+@property (weak, nonatomic) IBOutlet UIImageView *headerImage;
+@property (weak, nonatomic) IBOutlet LXPlayerView *videoView;   //视频播放视图
 @property (weak, nonatomic) IBOutlet UILabel *loveCount;
 
 @property (strong, nonatomic) UILabel *desLabel;
-@property (weak, nonatomic) IBOutlet UILabel *totalTime;
-@property (weak, nonatomic) IBOutlet UILabel *currentTime;
+@property (weak, nonatomic) IBOutlet UIScrollView *desScroll;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *myActivity;
-@property (weak, nonatomic) IBOutlet UIScrollView *desScroll;
 
 //转发/分享
 - (IBAction)share:(id)sender;
@@ -55,6 +53,7 @@
 {
     if (!_desLabel) {
         _desLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 200)];
+        [_desLabel setFont:[UIFont systemFontOfSize:15]];
     }
     return _desLabel;
 }
@@ -66,17 +65,18 @@
     
     self.desLabel.numberOfLines = 0;
     self.progressView.progress = 0.0;
-    [self.myActivity stopAnimating];
     
-    if (self.model) {
+    if (self.model)
+    {
+        //加载数据
         [self.headerImage sd_setImageWithURL:[NSURL URLWithString:self.model.user.avatar]];
         LXLog(@"%@", self.model.user.avatar);
         self.headerImage.layer.cornerRadius = self.headerImage.bounds.size.height/2;
         self.headerImage.layer.masksToBounds = YES;
         self.headerImage.clipsToBounds = YES;
         
-        self.userName.text = self.model.user.screen_name;
         self.userTime.text = self.model.created_at;
+        self.userName.text = self.model.user.screen_name;
         self.userVideoCount.text = self.model.user.be_liked_count;
         
         self.loveCount.text = self.model.likes_count;
@@ -89,7 +89,6 @@
         
         
         [self.videoView startPlayUrl:self.model.video];
-        
         [self.view bringSubviewToFront:[self.view viewWithTag:521]];
         
         LXLog(@"%@", self.model.url);
@@ -109,7 +108,7 @@
     self.desLabel.text = text;
     self.desLabel.numberOfLines = 0;
     CGRect frame = CGRectMake(5, 0, kScreenWidth - 10, 0);
-    CGRect rect = [text boundingRectWithSize:CGSizeMake(kScreenWidth - 12, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil];
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(kScreenWidth - 12, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil];
     frame.size.height = rect.size.height;
     if (frame.size.height > 30) {
         frame.size.height += 15;
@@ -143,6 +142,7 @@
     [MobClick endLogPageView:@"detailPage"];
 }
 
+#pragma mark 将秒数转换成
 - (NSString *)convertTime:(CGFloat)second{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate *d = [NSDate dateWithTimeIntervalSince1970:second];
@@ -157,16 +157,15 @@
 
 
 #pragma mark 播放器代理方法
-
+#pragma mark 结束播放执行的方法
 -(void)LXPlayerViewDidEndPlay:(LXPlayerView *)playView
 {
     [playView reStart];
 }
 
-
+#pragma mrak 播放中实时调用
 -(void)LXPlayerView:(LXPlayerView *)playerView current:(CGFloat)currentSecond total:(CGFloat)totalSecond
 {
-    
     self.progressView.progress = currentSecond/totalSecond;
     
     if (currentSecond + 1.5 > totalSecond) {
@@ -174,6 +173,7 @@
     }
 }
 
+#pragma mark 进入缓冲状态
 -(void)LXPlayerView:(LXPlayerView *)playerView loading:(CGFloat)loadProgress
 {
     if (![self.myActivity isAnimating]) {
@@ -182,6 +182,7 @@
     }
 }
 
+#pragma mark 缓冲完毕,可以继续播放
 - (void)LXPlayerView:(LXPlayerView *)playerView loaded:(CGFloat)loadProgress
 {
     if ([self.myActivity isAnimating]) {
@@ -201,8 +202,6 @@
 */
 
 - (IBAction)share:(id)sender {
-    
-    [self.videoView.player pause];
     NSMutableString *shareString = [[NSMutableString alloc] init];
     [shareString appendString:self.model.caption];
     [shareString appendString:@"\n"];
@@ -224,6 +223,11 @@
     [MobClick event:@"Forward"];
 }
 
+-(void)didSelectSocialPlatform:(NSString *)platformName withSocialData:(UMSocialData *)socialData
+{
+    [self.videoView.player pause];
+}
+
 -(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
 {
     //根据`responseCode`得到发送结果,如果分享成功
@@ -232,7 +236,7 @@
         //得到分享到的微博平台名
         LXLog(@"share to sns name is %@",[[response.data allKeys] objectAtIndex:0]);
     }
-    
+    NSLog(@"分享结果");
     [self.videoView.player play];
 }
 
@@ -243,6 +247,9 @@
         if ([LXDataBaseHandle collectWithMovieModel:self.model]) {
             LXLog(@"收藏成功");
             
+            UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"收藏成功" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alterView show];
+            
             //友盟统计
             NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
             dict[@"collect"] = self.model.url;
@@ -252,11 +259,15 @@
         }
         else
         {
+            UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"" message:@"收藏失败" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alterView show];
             LXLog(@"收藏失败");
         }
     }
     else
     {
+        UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"" message:@"已经收藏" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alterView show];
         LXLog(@"已经收藏了");
     }
     

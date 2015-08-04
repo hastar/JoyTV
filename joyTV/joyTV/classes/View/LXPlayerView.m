@@ -12,7 +12,6 @@
 #endif
 
 #import "LXPlayerView.h"
-#import "PlayerView.h"
 
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
@@ -117,7 +116,6 @@
     if ([keyPath isEqualToString:@"status"]) {
         if ([playerItem status] == AVPlayerStatusReadyToPlay) {
             LXLog(@"AVPlayerStatusReadyToPlay");
-            CMTime duration = self.playerItem.duration;// 获取视频总长度
             CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
             _totalTime = [self convertTime:totalSecond];// 转换成播放时间
             LXLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
@@ -146,9 +144,7 @@
     }else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
         _currentLoadTime = [self availableDuration];// 计算缓冲进度
         LXLog(@"Time Interval:%f",_currentLoadTime);
-        CMTime duration = _playerItem.duration;
         CMTime current = _playerItem.currentTime;
-        CGFloat totalDuration = CMTimeGetSeconds(duration);
         CGFloat currentTime = CMTimeGetSeconds(current);
         LXLog(@"----------------当前缓存进度%.f, ---------%.f/%.f", _currentLoadTime, currentTime, totalDuration);
         

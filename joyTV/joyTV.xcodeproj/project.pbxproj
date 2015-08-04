@@ -13,7 +13,6 @@
 		3F0BFFC41B627C8A008C2219 /* love.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0BFFC31B627C8A008C2219 /* love.png */; };
 		3F0BFFC61B628853008C2219 /* talk.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0BFFC51B628853008C2219 /* talk.png */; };
 		3F11BED41B69C68F00BAFF69 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F11BED31B69C68F00BAFF69 /* MessageUI.framework */; };
-		3F11BEDC1B69CBBB00BAFF69 /* LXEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F11BEDB1B69CBBB00BAFF69 /* LXEmailViewController.m */; };
 		3F43094D1B5F3A280064A43D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F43094C1B5F3A280064A43D /* main.m */; };
 		3F4309581B5F3A280064A43D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3F4309571B5F3A280064A43D /* Images.xcassets */; };
 		3F4309671B5F3A280064A43D /* joyTVTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F4309661B5F3A280064A43D /* joyTVTests.m */; };
@@ -24,12 +23,14 @@
 		3F5C672B1B5F74500027BC1B /* LXTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C672A1B5F74500027BC1B /* LXTabBarController.m */; };
 		3F5C67311B5F74BB0027BC1B /* LXNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F5C67301B5F74BB0027BC1B /* LXNavigationController.m */; };
 		3F5C67351B5F75D20027BC1B /* owner.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5C67341B5F75D20027BC1B /* owner.png */; };
+		3F5D31611B70B4C2007FF751 /* 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D315D1B70B4C2007FF751 /* 0.png */; };
+		3F5D31621B70B4C2007FF751 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D315E1B70B4C2007FF751 /* 1.png */; };
+		3F5D31631B70B4C2007FF751 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D315F1B70B4C2007FF751 /* 2.png */; };
+		3F5D31641B70B4C2007FF751 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F5D31601B70B4C2007FF751 /* 3.png */; };
 		3F66DBD61B5FC8D700FD510E /* LXSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F66DBD51B5FC8D700FD510E /* LXSegmentedControl.m */; };
 		3F784D561B649CA400F5FA7B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F784D551B649CA400F5FA7B /* AVFoundation.framework */; };
 		3F784D581B649CB700F5FA7B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F784D571B649CB700F5FA7B /* MediaPlayer.framework */; };
-		3F784D5A1B64B60D00F5FA7B /* aaa.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 3F784D591B64B60D00F5FA7B /* aaa.mp4 */; };
 		3F784D5D1B64C7BD00F5FA7B /* LXPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F784D5C1B64C7BD00F5FA7B /* LXPlayerView.m */; };
-		3F784D601B64C8B200F5FA7B /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F784D5F1B64C8B200F5FA7B /* PlayerView.m */; };
 		3F7F9F421B65D9AF00E3C79A /* collect.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F9F3F1B65D9AF00E3C79A /* collect.png */; };
 		3F7F9F431B65D9AF00E3C79A /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F9F401B65D9AF00E3C79A /* forward.png */; };
 		3F7F9F441B65D9AF00E3C79A /* love1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F9F411B65D9AF00E3C79A /* love1.png */; };
@@ -76,8 +77,6 @@
 		3F0BFFC31B627C8A008C2219 /* love.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = love.png; sourceTree = "<group>"; };
 		3F0BFFC51B628853008C2219 /* talk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = talk.png; sourceTree = "<group>"; };
 		3F11BED31B69C68F00BAFF69 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
-		3F11BEDA1B69CBBB00BAFF69 /* LXEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXEmailViewController.h; sourceTree = "<group>"; };
-		3F11BEDB1B69CBBB00BAFF69 /* LXEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXEmailViewController.m; sourceTree = "<group>"; };
 		3F4309471B5F3A280064A43D /* joyTV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = joyTV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F43094B1B5F3A280064A43D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3F43094C1B5F3A280064A43D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -98,15 +97,16 @@
 		3F5C672F1B5F74BB0027BC1B /* LXNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXNavigationController.h; sourceTree = "<group>"; };
 		3F5C67301B5F74BB0027BC1B /* LXNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXNavigationController.m; sourceTree = "<group>"; };
 		3F5C67341B5F75D20027BC1B /* owner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = owner.png; sourceTree = "<group>"; };
+		3F5D315D1B70B4C2007FF751 /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
+		3F5D315E1B70B4C2007FF751 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		3F5D315F1B70B4C2007FF751 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		3F5D31601B70B4C2007FF751 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		3F66DBD41B5FC8D700FD510E /* LXSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXSegmentedControl.h; sourceTree = "<group>"; };
 		3F66DBD51B5FC8D700FD510E /* LXSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXSegmentedControl.m; sourceTree = "<group>"; };
 		3F784D551B649CA400F5FA7B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3F784D571B649CB700F5FA7B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		3F784D591B64B60D00F5FA7B /* aaa.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = aaa.mp4; sourceTree = "<group>"; };
 		3F784D5B1B64C7BD00F5FA7B /* LXPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXPlayerView.h; sourceTree = "<group>"; };
 		3F784D5C1B64C7BD00F5FA7B /* LXPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXPlayerView.m; sourceTree = "<group>"; };
-		3F784D5E1B64C8B200F5FA7B /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
-		3F784D5F1B64C8B200F5FA7B /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
 		3F7F9F3F1B65D9AF00E3C79A /* collect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collect.png; sourceTree = "<group>"; };
 		3F7F9F401B65D9AF00E3C79A /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward.png; sourceTree = "<group>"; };
 		3F7F9F411B65D9AF00E3C79A /* love1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = love1.png; sourceTree = "<group>"; };
@@ -279,8 +279,6 @@
 				3F8384691B67AB88006AF680 /* LXAboutViewController.h */,
 				3F83846A1B67AB88006AF680 /* LXAboutViewController.m */,
 				3F83846B1B67AB88006AF680 /* LXAboutViewController.xib */,
-				3F11BEDA1B69CBBB00BAFF69 /* LXEmailViewController.h */,
-				3F11BEDB1B69CBBB00BAFF69 /* LXEmailViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -325,8 +323,8 @@
 		3F5C67321B5F75D20027BC1B /* image */ = {
 			isa = PBXGroup;
 			children = (
+				3F5D315C1B70B4C2007FF751 /* Owner */,
 				3F83846E1B67AED4006AF680 /* my.png */,
-				3F784D591B64B60D00F5FA7B /* aaa.mp4 */,
 				3F0BFFC21B627C8A008C2219 /* DetailVC */,
 				3F5C67331B5F75D20027BC1B /* tabbar */,
 			);
@@ -341,6 +339,17 @@
 			path = tabbar;
 			sourceTree = "<group>";
 		};
+		3F5D315C1B70B4C2007FF751 /* Owner */ = {
+			isa = PBXGroup;
+			children = (
+				3F5D315D1B70B4C2007FF751 /* 0.png */,
+				3F5D315E1B70B4C2007FF751 /* 1.png */,
+				3F5D315F1B70B4C2007FF751 /* 2.png */,
+				3F5D31601B70B4C2007FF751 /* 3.png */,
+			);
+			path = Owner;
+			sourceTree = "<group>";
+		};
 		3FAAB5871B607E61006656FA /* CusomSegment */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,8 +362,6 @@
 		3FAAB5941B608C87006656FA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				3F784D5E1B64C8B200F5FA7B /* PlayerView.h */,
-				3F784D5F1B64C8B200F5FA7B /* PlayerView.m */,
 				3FAAB5951B608C87006656FA /* LXHotCollectView.h */,
 				3FAAB5961B608C87006656FA /* LXHotCollectView.m */,
 				3FAAB5A11B60D951006656FA /* LXHotCollectionViewCell.h */,
@@ -517,9 +524,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F5D31611B70B4C2007FF751 /* 0.png in Resources */,
 				3FF48F571B66517A00118AB0 /* UMSCommentInputController.xib in Resources */,
 				3F0BFFC61B628853008C2219 /* talk.png in Resources */,
-				3F784D5A1B64B60D00F5FA7B /* aaa.mp4 in Resources */,
 				3FF48F5C1B66517A00118AB0 /* UMSnsAccountViewController.xib in Resources */,
 				3FF48F581B66517A00118AB0 /* UMSCommentInputControlleriPad.xib in Resources */,
 				3FF48F541B66517A00118AB0 /* UMSocialLocalizable.strings in Resources */,
@@ -535,8 +542,11 @@
 				3FF48F5A1B66517A00118AB0 /* UMShareEditViewControlleriPad.xib in Resources */,
 				3F83846D1B67AB88006AF680 /* LXAboutViewController.xib in Resources */,
 				3FF48F5D1B66517A00118AB0 /* UMSShareListController.xib in Resources */,
+				3F5D31631B70B4C2007FF751 /* 2.png in Resources */,
 				3FF48F5B1B66517A00118AB0 /* UMSLoginViewController.xib in Resources */,
+				3F5D31641B70B4C2007FF751 /* 3.png in Resources */,
 				3F4309581B5F3A280064A43D /* Images.xcassets in Resources */,
+				3F5D31621B70B4C2007FF751 /* 1.png in Resources */,
 				3F0BFFC41B627C8A008C2219 /* love.png in Resources */,
 				3F7F9F431B65D9AF00E3C79A /* forward.png in Resources */,
 			);
@@ -590,7 +600,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F5C67211B5F72880027BC1B /* LXIndexViewController.m in Sources */,
-				3F11BEDC1B69CBBB00BAFF69 /* LXEmailViewController.m in Sources */,
 				3FAAB5971B608C87006656FA /* LXHotCollectView.m in Sources */,
 				3FAAB58A1B607E61006656FA /* LXSegmentControl.m in Sources */,
 				3F5C671E1B5F722F0027BC1B /* LXOwnerViewController.m in Sources */,
@@ -607,7 +616,6 @@
 				3FAAB59A1B60C6EC006656FA /* LXMovieModel.m in Sources */,
 				3F5C672B1B5F74500027BC1B /* LXTabBarController.m in Sources */,
 				3FAAB59D1B60D405006656FA /* LXUser.m in Sources */,
-				3F784D601B64C8B200F5FA7B /* PlayerView.m in Sources */,
 				3F66DBD61B5FC8D700FD510E /* LXSegmentedControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,7 +687,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -716,7 +724,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -729,8 +737,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
 				INFOPLIST_FILE = joyTV/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -739,7 +747,7 @@
 					"$(PROJECT_DIR)/joyTV/tool/UMSocial_Sdk_4.2.3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "295af730-0164-42c7-bd5c-373d6daf40d3";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -750,8 +758,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
 				INFOPLIST_FILE = joyTV/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -760,7 +768,7 @@
 					"$(PROJECT_DIR)/joyTV/tool/UMSocial_Sdk_4.2.3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "295af730-0164-42c7-bd5c-373d6daf40d3";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

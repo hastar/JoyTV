@@ -23,8 +23,8 @@
 @interface LXHotViewController () <LXSegmentControlDelegate, LXHotCollectViewDelegate>
 
 @property (nonatomic, strong) LXSegmentControl *segment;
-@property (nonatomic, strong) LXHotCollectView *hotCollectView;
-@property (nonatomic, strong) LXHotCollectView *newCollectView;
+@property (nonatomic, strong) LXHotCollectView *hotCollectView; //最热视图
+@property (nonatomic, strong) LXHotCollectView *newCollectView; //最新视图
 
 @end
 
@@ -52,7 +52,7 @@
 - (LXHotCollectView *)hotCollectView
 {
     if (!_hotCollectView) {
-        _hotCollectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 70, kScreenWidth, kScreenHeight - 70 - 40)];
+        _hotCollectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 50, kScreenWidth, kScreenHeight - 50 - 40)];
         _hotCollectView.delegate = self;
         _hotCollectView.dataUrl = @"https://newapi.meipai.com/hot/feed_timeline.json?locale=1&";
     }
@@ -79,6 +79,7 @@
     [self.view addSubview:self.hotCollectView];
     [self.view addSubview:self.newCollectView];
     [self.view addSubview:self.segment];
+    
     self.segment.selectedIndex = 0;
     self.hotCollectView.hidden = YES;
     [self.newCollectView refresh];
@@ -108,6 +109,7 @@
     }
 }
 
+
 -(void)LXHotCollectView:(LXHotCollectView *)collectView didSelectIndexPath:(NSIndexPath *)indexPath movieModel:(LXMovieModel *)movieModel
 {
     
@@ -117,11 +119,6 @@
     dtVc.model = movieModel;
     
     [self.navigationController pushViewController:dtVc animated:YES];
-//    
-//    LXDetailViewController *detailVC = [[LXDetailViewController alloc] init];
-//    detailVC.model = movieModel;
-//    [self.navigationController pushViewController:detailVC animated:YES];
-    
 }
 
 

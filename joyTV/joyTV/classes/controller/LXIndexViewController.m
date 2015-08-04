@@ -18,7 +18,9 @@
 
 @interface LXIndexViewController () <LXSegmentControlDelegate, LXHotCollectViewDelegate>
 
+//分类名称数组
 @property (nonatomic, strong) NSArray *cateArray;
+//分类连接数组
 @property (nonatomic, strong) NSArray *cateLinkArray;
 @property (nonatomic, strong) LXSegmentControl *segment;
 @property (nonatomic, strong) NSMutableArray *collectArray;
@@ -53,7 +55,7 @@
 {
     if (!_collectArray)
     {
-        
+        //循环创建瀑布流界面
         _collectArray = [[NSMutableArray alloc] initWithCapacity:2];
         for (int i = 0; i < self.cateArray.count; i++)
         {
@@ -70,7 +72,7 @@
 }
 
 
-
+#pragma mark segment切换时响应的方法
 -(void)LXSegmentControl:(LXSegmentControl *)segment didSelectItemAtIndex:(NSInteger)index
 {
    for (int i = 0;  i < self.collectArray.count; i++)
@@ -124,9 +126,10 @@
     
 }
 
-
+#pragma mark 瀑布流点击方法
 -(void)LXHotCollectView:(LXHotCollectView *)collectView didSelectIndexPath:(NSIndexPath *)indexPath movieModel:(LXMovieModel *)movieModel
 {
+    //推到详情页面
     LXDtViewController *dtVc = [[LXDtViewController alloc] init];
     dtVc.model = movieModel;
     

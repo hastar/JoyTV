@@ -13,6 +13,7 @@
 @class LXMovieModel;
 @interface LXDtViewController : UIViewController
 
+//需要展示的model
 @property (nonatomic, strong) LXMovieModel *model;
 
 @end

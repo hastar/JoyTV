@@ -12,11 +12,11 @@
 #endif
 
 #import "LXOwnerViewController.h"
-#import "LXDataBaseHandle.h"
 #import "LXCollectViewController.h"
-#import "SDImageCache.h"
 #import "LXAboutViewController.h"
-#import "LXEmailViewController.h"
+#import "LXDataBaseHandle.h"
+#import "SDImageCache.h"
+
 #import <MessageUI/MessageUI.h>
 
 #define LXColor(r, g, b, a) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:(a)]
@@ -54,6 +54,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    //设置标题文字颜色
     self.navigationController.navigationBar.tintColor = LXColor(253.0/255, 189.0/255, 10.0/255, 1.0);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:LXColor(253.0/255, 189.0/255, 10.0/255, 1.0)}];
 
@@ -62,40 +63,49 @@
     
 }
 
-#pragma mark tableView代理方法
+#pragma mark - tableView代理方法
+#pragma mark - 返回分区数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return self.dataArray.count;
 }
 
+#pragma mark 每个分区的cell个数
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;
 }
 
+#pragma mark 返回cell内容
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *strID = @"cellID";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:strID];
-    if (cell == nil) {
+    if (cell == nil)
+    {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:strID];
     }
     
+    NSString *imageName = [NSString stringWithFormat:@"%ld.png", (long)indexPath.section];
     cell.textLabel.text = self.dataArray[indexPath.section];
+    cell.imageView.image = [UIImage imageNamed:imageName];
     
     return cell;
 }
 
+#pragma mark 设置分区头高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 2.0;
 }
 
+#pragma mark 选中cell时响应
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
         case 0:
         {
+            //我的收藏
             NSArray *array = [LXDataBaseHandle arrayWithAllModel];
             LXCollectViewController *collectVC = [[LXCollectViewController alloc] init];
             collectVC.modelArray = array;
@@ -105,6 +115,8 @@
         }
         case 1:
         {
+            //清除缓存
+            //获取缓存大小
             NSUInteger cacheSize = [[SDImageCache sharedImageCache] getSize];
             CGFloat size;
             NSString *mete;
@@ -118,10 +130,12 @@
                 mete = @"K";
             }
             
+            //清除缓存
             [[SDImageCache sharedImageCache] clearMemory];
             [[SDImageCache sharedImageCache] clearDisk];
             [[SDImageCache sharedImageCache] cleanDisk];
             
+            //弹出提示
             NSString *str = [NSString stringWithFormat:@"已清空 %.2f%@ 缓存", size, mete];
             UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"" message:str delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [alterView show];
@@ -129,17 +143,20 @@
         }
         case 2:
         {
+            //关于界面
             LXAboutViewController *aboutVC = [[LXAboutViewController alloc] init];
             [self.navigationController pushViewController:aboutVC animated:YES];
             break;
         }
         case 3:
         {
-//            LXEmailViewController *emailVc = [[LXEmailViewController alloc] init];
-//            [self.navigationController pushViewController:emailVc animated:YES];
-            
+            //返回界面，弹出邮件
             if ([MFMailComposeViewController canSendMail]) { // 用户已设置邮件账户
                 [self sendEmailAction]; // 调用发送邮件的代码
+            }
+            else{
+                UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:nil message:@"请设置系统Email" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:@"不乐", nil];
+                [alterView show];
             }
         }
             
@@ -174,6 +191,7 @@
     [self presentViewController:mailCompose animated:YES completion:nil];
 }
 
+#pragma mark 邮件代理方法
 - (void)mailComposeController:(MFMailComposeViewController *)controller
           didFinishWithResult:(MFMailComposeResult)result
                         error:(NSError *)error

@@ -43,9 +43,11 @@
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:18];
     textAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
+    
     NSMutableDictionary *selectTextAttrs = [NSMutableDictionary dictionary];
     selectTextAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:18];
     selectTextAttrs[NSForegroundColorAttributeName] = LXColor(253.0/255, 189.0/255, 10.0/255, 1.0);
+    
     [[UITabBarItem appearance] setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:selectTextAttrs forState:UIControlStateSelected];
     [[UITabBarItem appearance] setTitlePositionAdjustment:UIOffsetMake(0.0, -15.0)];
@@ -55,8 +57,10 @@
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
+    
     [MobClick setEncryptEnabled:YES];
     [MobClick startWithAppkey:@"55b6157ee0f55a8006000d14" reportPolicy:BATCH   channelId:nil];
+    //友盟统计
     [UMSocialData setAppKey:@"55b6157ee0f55a8006000d14"];
     
     

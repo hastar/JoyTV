@@ -25,19 +25,23 @@
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 @interface LXHotCollectView ()<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, strong) UICollectionView *collectView;
+@property (nonatomic, assign) NSInteger page;       //当前加载第多少页数据
+@property (nonatomic, assign) BOOL isUpLoading;     //是否正在加载网络数据
 @property (nonatomic, strong) NSMutableArray *modelArray;
-@property (nonatomic, assign) BOOL isUpLoading;
-@property (nonatomic, assign) NSInteger page;
+@property (nonatomic, strong) UICollectionView *collectView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *httpManager;
+
+@property (nonatomic, assign) BOOL hasLoaded;
 
 @end
 
 @implementation LXHotCollectView
 
+
+//更新数据
 -(void)refresh
 {
-    [self reloadMoreData1];
+    [self reloadMoreData];
 }
 
 -(NSMutableArray *)modelArray
@@ -52,9 +56,11 @@
 -(instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         self.page = 2;
         self.isUpLoading = NO;
+        self.hasLoaded = NO;
         self.backgroundColor = [UIColor whiteColor];
         
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
@@ -73,10 +79,21 @@
         
         UINib *nib = [UINib nibWithNibName:@"LXHotCollectionViewCell" bundle:nil];
         [_collectView registerNib:nib forCellWithReuseIdentifier:@"hotcell"];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginLoad:) name:AFNetworkingReachabilityDidChangeNotification object:nil];
     }
     
     return self;
 }
+
+#pragma mark 来网之后加载数据
+-(void)beginLoad:(id)sender
+{
+    if (!self.hasLoaded && [[AFNetworkReachabilityManager sharedManager] isReachable]) {
+        [self refresh];
+    }  
+}
+
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -122,11 +139,12 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    if (!self.isUpLoading && indexPath.row >= self.modelArray.count-5) {
-        
-        LXLog(@"-----------------------------------正在更新数据,当前总共有%ld--%ld", self.modelArray.count, indexPath.row);
+    //滚到最后5个时，开始加载下一页
+    if (!self.isUpLoading && indexPath.row >= self.modelArray.count-5)
+    {
+        LXLog(@"---------正在更新数据,当前总共有%ld--%ld", self.modelArray.count, indexPath.row);
         self.isUpLoading = YES;
-        [self reloadMoreData1];
+        [self reloadMoreData];
     }
 }
 
@@ -142,66 +160,11 @@
 }
 
 
-
-
+#pragma mark 刷新数据
 - (void)reloadMoreData
 {
-    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    if (manager.isReachable)
-    {
-        LXLog(@"当前***********有网络");
-    }
-    else
-    {
-        LXLog(@"当前************没有网络");
-    }
-    
-    
-    NSString *urlString = [NSString stringWithFormat:@"%@&page=%ld", self.dataUrl, (long)self.page];
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSURLRequest *requset = [NSURLRequest requestWithURL:url];
-    
-    __block typeof(self) weakSelf = self;
-    [NSURLConnection sendAsynchronousRequest:requset queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (data == nil || data.length == 0) {
-            weakSelf.isUpLoading = NO;
-            return ;
-        }
-        
-        NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-//        LXLog(@"%@", array);
-        for (NSDictionary *dict in array) {
-            LXMovieModel *model = [[LXMovieModel alloc] init];
-            model.recommend_caption = dict[@"recommend_caption"];
-            NSDictionary *mediaDict = dict[@"media"];
-            [model setValuesForKeysWithDictionary:mediaDict];
-            
-            [weakSelf.modelArray addObject:model];
-            
-        }
-        
-        weakSelf.page += 1;
-        [weakSelf.collectView reloadData];
-        weakSelf.isUpLoading = NO;
-        
-    }];
-}
-
-- (void)reloadMoreData1
-{
-    AFNetworkReachabilityManager *manager = [AFNetworkReachabilityManager sharedManager];
-    if (manager.isReachable)
-    {
-        LXLog(@"当前***********有网络");
-    }
-    else
-    {
-        LXLog(@"当前************没有网络");
-    }
     
     self.httpManager = [AFHTTPRequestOperationManager manager];
-    
-    
     
     NSString *urlString = [NSString stringWithFormat:@"%@&page=%ld", self.dataUrl, (long)self.page];
     
@@ -209,6 +172,7 @@
     self.httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [self.httpManager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         LXLog(@"数据请求成功");
+        weakSelf.hasLoaded = YES;
         
         NSData *data = responseObject;
         if (data == nil || data.length == 0) {
@@ -216,7 +180,6 @@
         }
         
         NSArray *array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-        //        LXLog(@"%@", array);
         for (NSDictionary *dict in array) {
             LXMovieModel *model = [[LXMovieModel alloc] init];
             model.recommend_caption = dict[@"recommend_caption"];
@@ -243,6 +206,7 @@
 
 -(void)dealloc
 {
+    //关闭所有网络请求
     [self.httpManager.operationQueue cancelAllOperations];
 }
 
