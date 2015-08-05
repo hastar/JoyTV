@@ -202,7 +202,7 @@
             LXLog(@"Mail send canceled...");
             break;
         case MFMailComposeResultSaved: // 用户保存邮件
-            LXLog(@"Mail saved...");
+            LXLog(@"Mail send begin...");
             break;
         case MFMailComposeResultSent: // 用户点击发送
             LXLog(@"Mail sent...");
