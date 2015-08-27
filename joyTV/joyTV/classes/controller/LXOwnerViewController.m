@@ -107,7 +107,7 @@
         case 0:
         {
             //我的收藏
-            NSArray *array = [LXDataBaseHandle arrayWithAllModel];
+            NSArray *array = [[LXDataBaseHandle shareInstance] arrayWithAllModel];
             LXCollectViewController *collectVC = [[LXCollectViewController alloc] init];
             collectVC.modelArray = array;
             [self.navigationController pushViewController:collectVC animated:YES];

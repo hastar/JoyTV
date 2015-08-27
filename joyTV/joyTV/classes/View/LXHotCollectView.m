@@ -214,11 +214,17 @@
         if (!self.hasLoaded)
         {
             //当前没有网络，且是第一次加载，则加载数据库内容
-            [weakSelf.modelArray removeAllObjects];
-            
-            NSArray *array = [LXDataBaseHandle arrayLocalModelWithCategory:self.name];
-            [weakSelf.modelArray addObjectsFromArray:array];
-            [weakSelf.collectView reloadData];
+            [weakSelf loadLocalData];
+            //            [weakSelf.modelArray removeAllObjects];
+//            
+//            NSArray *array = [LXDataBaseHandle arrayLocalModelWithCategory:[weakSelf.name copy]];
+//            
+//            if (array == nil) {
+//                return ;
+//            }
+//            
+//            [weakSelf.modelArray addObjectsFromArray:array];
+//            [weakSelf.collectView reloadData];
         }
         
         
@@ -226,6 +232,21 @@
     } ];
 }
 
+-(void)loadLocalData
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSArray *array = [[LXDataBaseHandle shareInstance] arrayLocalModelWithCategory:_name];
+        
+        if (array == nil) {
+            return ;
+        }
+        
+        [self.modelArray removeAllObjects];
+        [self.modelArray addObjectsFromArray:array];
+        [self.collectView reloadData];
+    });
+    
+}
 
 
 -(void)dealloc
@@ -237,7 +258,14 @@
 
 - (void) localData:(id)sender
 {
-    [LXDataBaseHandle localModeWithArray:self.modelArray category:self.name];
+    NSArray *array = [NSArray arrayWithArray:self.modelArray];
+    NSString *tempName = [NSString stringWithFormat:@"%@", self.name];
+    
+//    NSLog(@"%ld",[NSThread isMainThread ]);
+//    [[LXDataBaseHandle shareInstance] testData:tempName];
+    [[LXDataBaseHandle shareInstance] testData:array andCategory:tempName];
+    [[LXDataBaseHandle shareInstance] saveModeWithArray:array andCategory:tempName];
+    [[LXDataBaseHandle shareInstance] localModeWithArray:array andCategory:tempName];
 }
 
 

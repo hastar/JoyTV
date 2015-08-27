@@ -10,15 +10,27 @@
 #else
 #define LXLog(...)
 #endif
+#import "LXDataBaseHandle.h"
+#import <UIKit/UIKit.h>
 
 #import "FMDB.h"
-#import "LXDataBaseHandle.h"
-
 #import "LXMovieModel.h"
 
 @implementation LXDataBaseHandle
 
-+ (FMDatabase *)openDB
++ (LXDataBaseHandle *)shareInstance
+{
+    static LXDataBaseHandle *dataBaseHandle = nil;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        dataBaseHandle = [[LXDataBaseHandle alloc] init];
+    });
+    
+    return dataBaseHandle;
+}
+
+
+- (FMDatabase *)openDB
 {
     static FMDatabase *myDB = nil;
     static dispatch_once_t onceToken;
@@ -42,7 +54,7 @@
 
 /************************************** 收 藏 ***********************************/
 #pragma mark 收藏数据
-+ (BOOL) collectWithMovieModel:(LXMovieModel *)model
+- (BOOL) collectWithMovieModel:(LXMovieModel *)model
 {
     if ([self isCollectWithModel:model]) {
         return YES;
@@ -80,7 +92,7 @@
  *  @return 返回删除结果
  */
 #pragma mark 删除收藏
-+ (BOOL) deleteWithMovieModel:(LXMovieModel *)model
+- (BOOL) deleteWithMovieModel:(LXMovieModel *)model
 {
     @try
     {
@@ -107,7 +119,7 @@
  *  @return 返回所有model的数组
  */
 #pragma mark 获取所有收藏的model
-+ (NSArray *) arrayWithAllModel
+- (NSArray *) arrayWithAllModel
 {
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:2];
     FMResultSet *resultSet = [[self openDB] executeQuery:@"select videoId, data from collectTable;"];
@@ -149,7 +161,7 @@
  *  @return 返回判断结果,YES为已经收藏，NO为未被收藏
  */
 #pragma mark 返回当前model 是否已经被收藏
-+ (BOOL) isCollectWithModel:(LXMovieModel *)model
+- (BOOL) isCollectWithModel:(LXMovieModel *)model
 {
     
     FMResultSet *resultSet = [[self openDB] executeQuery:@"select * from collectTable where videoId = ?;", model.ID];
@@ -171,12 +183,18 @@
  *  @param modelArray 要保存的数组
  *  @param category   所属类目
  */
+- (void) saveModeWithArray:(NSArray *)modelArray andCategory:(NSString *)category
+{
+    
+}
+
+
 #pragma mark 数据本地化
-+ (void) localModeWithArray:(NSArray *)modelArray category:(NSString *)category
+- (void) localModeWithArray:(NSArray *)modelArray andCategory:(NSString *)category
 {
     if (category.length <= 0) return;
     
-    if (modelArray.count <= 0) return;
+    if (modelArray == nil || modelArray.count <= 0) return;
     
     int i = 0;
     for (LXMovieModel *model in modelArray)
@@ -188,13 +206,20 @@
             [archiver encodeObject:model forKey:@"movieModel"];
             [archiver finishEncoding];
             
-            NSString *sql = [NSString stringWithFormat:@"insert into localTable(videoId,category,data) values('%@', '%@', '%@');", model.ID,category, data];
-            BOOL result = [[self openDB] executeUpdate:sql];
+            
+//            BOOL result = [[self openDB] executeQuery:@"insert into localTable(videoId,category,data) values(?, ?, ?);", model.ID,category, data];
+            
+            BOOL result = [[self openDB] executeUpdate:@"insert into localTable(videoId,category,data) values(?, ?, ?);", model.ID,category, data];
+            
             if (!result)
             {
                 LXLog(@"数据插入错误");
                 
                 return ;
+            }
+            else
+            {
+                LXLog(@"插入成功");
             }
             
             i++;
@@ -217,9 +242,10 @@
  *  @return 类目对应的本地化数据
  */
 #pragma mark 获取本地化数据
-+ (NSArray *)arrayLocalModelWithCategory:(NSString *)category
+- (NSArray *)arrayLocalModelWithCategory:(NSString *)category
 {
-    NSLog(@"%@", category);
+    category = category;
+    if (category == nil || category.length <= 0) return nil;
     NSMutableArray *modelArray = [[NSMutableArray alloc] initWithCapacity:2];
     
     FMResultSet *resultSet = [[self openDB] executeQuery:@"select videoId, data from localTable where category = ?;", category];
@@ -261,7 +287,7 @@
  *  清除所有本地化数据
  */
 #pragma mark 清除所有本地化数据
-+ (void) clearAllLocalModel
+- (void) clearAllLocalModel
 {
     @try
     {
@@ -280,5 +306,15 @@
     }
 
 }
+
+- (void) testData:(NSArray *)modeArray andCategory:(NSString *)category
+{
+    NSLog(@"%@", category);
+    NSString *str = [NSString stringWithFormat:@"%@", category];
+    NSLog(@"%@", str);
+    
+    NSLog(@"%@", modeArray);
+}
+
 
 @end

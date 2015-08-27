@@ -243,8 +243,8 @@
 
 - (IBAction)collection:(id)sender {
     
-    if (![LXDataBaseHandle isCollectWithModel:self.model]) {
-        if ([LXDataBaseHandle collectWithMovieModel:self.model]) {
+    if (![[LXDataBaseHandle shareInstance] isCollectWithModel:self.model]) {
+        if ([[LXDataBaseHandle shareInstance] collectWithMovieModel:self.model]) {
             LXLog(@"收藏成功");
             
             UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:@"收藏成功" message:@"" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];

@@ -118,7 +118,7 @@
             LXLog(@"AVPlayerStatusReadyToPlay");
             CGFloat totalSecond = playerItem.duration.value / playerItem.duration.timescale;// 转换成秒
             _totalTime = [self convertTime:totalSecond];// 转换成播放时间
-            LXLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
+//            LXLog(@"movie total duration:%f",CMTimeGetSeconds(duration));
             [self monitoringPlayback:self.playerItem];// 监听播放状态
             
             //数据读取完毕，可以播放
@@ -146,7 +146,7 @@
         LXLog(@"Time Interval:%f",_currentLoadTime);
         CMTime current = _playerItem.currentTime;
         CGFloat currentTime = CMTimeGetSeconds(current);
-        LXLog(@"----------------当前缓存进度%.f, ---------%.f/%.f", _currentLoadTime, currentTime, totalDuration);
+//        LXLog(@"----------------当前缓存进度%.f, ---------%.f/%.f", _currentLoadTime, currentTime, totalDuration);
         
         if (_currentLoadTime > currentTime+2 && self.player.rate == 0) {
             self.player.rate = 1;
