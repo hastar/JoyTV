@@ -17,6 +17,7 @@
 
 #import "LXUser.h"
 #import "LXMovieModel.h"
+#import "LXDataBaseHandle.h"
 
 #import "AFNetworking.h"
 
@@ -81,6 +82,8 @@
         [_collectView registerNib:nib forCellWithReuseIdentifier:@"hotcell"];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(beginLoad:) name:AFNetworkingReachabilityDidChangeNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(localData:) name:@"localData" object:nil];
     }
     
     return self;
@@ -156,6 +159,10 @@
         [self.delegate LXHotCollectView:self didSelectIndexPath:indexPath movieModel:model];
     }
     
+    
+    
+    
+    
     LXLog(@"%@", model.recommend_caption);
 }
 
@@ -172,6 +179,12 @@
     self.httpManager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [self.httpManager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         LXLog(@"数据请求成功");
+        
+        if (!weakSelf.hasLoaded)
+        {
+            //如果是第一次加载网络数据，则删除原有数据
+            [weakSelf.modelArray removeAllObjects];
+        }
         weakSelf.hasLoaded = YES;
         
         NSData *data = responseObject;
@@ -197,10 +210,21 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         weakSelf.isUpLoading = NO;
+        
+        if (!self.hasLoaded)
+        {
+            //当前没有网络，且是第一次加载，则加载数据库内容
+            [weakSelf.modelArray removeAllObjects];
+            
+            NSArray *array = [LXDataBaseHandle arrayLocalModelWithCategory:self.name];
+            [weakSelf.modelArray addObjectsFromArray:array];
+            [weakSelf.collectView reloadData];
+        }
+        
+        
         LXLog(@"数据请求失败");
     } ];
 }
-
 
 
 
@@ -211,6 +235,10 @@
 }
 
 
+- (void) localData:(id)sender
+{
+    [LXDataBaseHandle localModeWithArray:self.modelArray category:self.name];
+}
 
 
 /*

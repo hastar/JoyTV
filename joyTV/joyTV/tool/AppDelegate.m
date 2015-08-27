@@ -13,11 +13,14 @@
 #import "UMSocial.h"
 #import "UMFeedback.h"
 #import "AFNetworking.h"
+#import "LXDataBaseHandle.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define LXColor(r, g, b, a) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:(a)]
 @interface AppDelegate ()
+
+@property (nonatomic, strong) LXTabBarController *myTabBar;
 
 @end
 
@@ -27,13 +30,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    LXTabBarController *myTabBar = [[LXTabBarController alloc] init];
-    self.window.rootViewController = myTabBar;
+    self.myTabBar = [[LXTabBarController alloc] init];
+    self.window.rootViewController = self.myTabBar;
     
     //更改TabBar的高度
-    ;
-    myTabBar.tabBar.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
-    for (UIView *transitionView in myTabBar.view.subviews) {
+    self.myTabBar.tabBar.frame = CGRectMake(0, kScreenHeight - 40, kScreenWidth, 40);
+    for (UIView *transitionView in self.myTabBar.view.subviews) {
         CGRect frame = transitionView.frame;
         frame.size.height = kScreenHeight - 40;
         transitionView.frame = frame;
@@ -58,8 +60,12 @@
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
     
+    [MobClick checkUpdate];
     [MobClick setEncryptEnabled:YES];
     [MobClick startWithAppkey:@"55b6157ee0f55a8006000d14" reportPolicy:BATCH   channelId:nil];
+    
+    [UMFeedback setAppkey:@"55b6157ee0f55a8006000d14"];
+    
     //友盟统计
     [UMSocialData setAppKey:@"55b6157ee0f55a8006000d14"];
     
@@ -77,6 +83,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    NSLog(@"程序进入后台");
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -89,6 +96,12 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
+    [LXDataBaseHandle clearAllLocalModel];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"localData" object:nil];
+    
+    NSLog(@"程序将要被关闭");
 }
 
 @end

@@ -45,6 +45,9 @@
 		3FAAB59D1B60D405006656FA /* LXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB59C1B60D405006656FA /* LXUser.m */; };
 		3FAAB5A41B60D951006656FA /* LXHotCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FAAB5A21B60D951006656FA /* LXHotCollectionViewCell.m */; };
 		3FAAB5A51B60D951006656FA /* LXHotCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FAAB5A31B60D951006656FA /* LXHotCollectionViewCell.xib */; };
+		3FD440CA1B7B323C002B1627 /* inform.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD440C91B7B323C002B1627 /* inform.png */; };
+		3FD440CC1B7B3270002B1627 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD440CB1B7B3270002B1627 /* 4.png */; };
+		3FD440CF1B7B33C6002B1627 /* LXinformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD440CE1B7B33C6002B1627 /* LXinformViewController.m */; };
 		3FF48F541B66517A00118AB0 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3FF48F3A1B66517A00118AB0 /* UMSocialLocalizable.strings */; };
 		3FF48F551B66517A00118AB0 /* libUMSocial_Sdk_4.2.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FF48F481B66517A00118AB0 /* libUMSocial_Sdk_4.2.3.a */; };
 		3FF48F561B66517A00118AB0 /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FF48F4A1B66517A00118AB0 /* UMSCommentDetailController.xib */; };
@@ -129,6 +132,10 @@
 		3FAAB5A11B60D951006656FA /* LXHotCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXHotCollectionViewCell.h; sourceTree = "<group>"; };
 		3FAAB5A21B60D951006656FA /* LXHotCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXHotCollectionViewCell.m; sourceTree = "<group>"; };
 		3FAAB5A31B60D951006656FA /* LXHotCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LXHotCollectionViewCell.xib; sourceTree = "<group>"; };
+		3FD440C91B7B323C002B1627 /* inform.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inform.png; sourceTree = "<group>"; };
+		3FD440CB1B7B3270002B1627 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		3FD440CD1B7B33C6002B1627 /* LXinformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXinformViewController.h; sourceTree = "<group>"; };
+		3FD440CE1B7B33C6002B1627 /* LXinformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXinformViewController.m; sourceTree = "<group>"; };
 		3FF48F3B1B66517A00118AB0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		3FF48F3D1B66517A00118AB0 /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		3FF48F3E1B66517A00118AB0 /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
@@ -185,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				3F7F9F3F1B65D9AF00E3C79A /* collect.png */,
+				3FD440C91B7B323C002B1627 /* inform.png */,
 				3F7F9F401B65D9AF00E3C79A /* forward.png */,
 				3F7F9F411B65D9AF00E3C79A /* love1.png */,
 				3F0BFFC51B628853008C2219 /* talk.png */,
@@ -279,6 +287,8 @@
 				3F8384691B67AB88006AF680 /* LXAboutViewController.h */,
 				3F83846A1B67AB88006AF680 /* LXAboutViewController.m */,
 				3F83846B1B67AB88006AF680 /* LXAboutViewController.xib */,
+				3FD440CD1B7B33C6002B1627 /* LXinformViewController.h */,
+				3FD440CE1B7B33C6002B1627 /* LXinformViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -346,6 +356,7 @@
 				3F5D315E1B70B4C2007FF751 /* 1.png */,
 				3F5D315F1B70B4C2007FF751 /* 2.png */,
 				3F5D31601B70B4C2007FF751 /* 3.png */,
+				3FD440CB1B7B3270002B1627 /* 4.png */,
 			);
 			path = Owner;
 			sourceTree = "<group>";
@@ -533,9 +544,11 @@
 				3FF48F5E1B66517A00118AB0 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				3F0BFFC11B62720B008C2219 /* LXDtViewController.xib in Resources */,
 				3F7F9F421B65D9AF00E3C79A /* collect.png in Resources */,
+				3FD440CC1B7B3270002B1627 /* 4.png in Resources */,
 				3FF48F591B66517A00118AB0 /* UMShareEditViewController.xib in Resources */,
 				3F5C67351B5F75D20027BC1B /* owner.png in Resources */,
 				3F7F9F441B65D9AF00E3C79A /* love1.png in Resources */,
+				3FD440CA1B7B323C002B1627 /* inform.png in Resources */,
 				3F83846F1B67AED4006AF680 /* my.png in Resources */,
 				3FF48F561B66517A00118AB0 /* UMSCommentDetailController.xib in Resources */,
 				3FAAB5A51B60D951006656FA /* LXHotCollectionViewCell.xib in Resources */,
@@ -601,6 +614,7 @@
 			files = (
 				3F5C67211B5F72880027BC1B /* LXIndexViewController.m in Sources */,
 				3FAAB5971B608C87006656FA /* LXHotCollectView.m in Sources */,
+				3FD440CF1B7B33C6002B1627 /* LXinformViewController.m in Sources */,
 				3FAAB58A1B607E61006656FA /* LXSegmentControl.m in Sources */,
 				3F5C671E1B5F722F0027BC1B /* LXOwnerViewController.m in Sources */,
 				3F5C67311B5F74BB0027BC1B /* LXNavigationController.m in Sources */,
@@ -687,7 +701,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -724,7 +738,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -740,7 +754,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
 				INFOPLIST_FILE = joyTV/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -761,7 +775,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
 				INFOPLIST_FILE = joyTV/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

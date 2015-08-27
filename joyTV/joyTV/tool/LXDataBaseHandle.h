@@ -11,6 +11,9 @@
 @class LXMovieModel;
 @interface LXDataBaseHandle : NSObject
 
+
+
+/************************************** 收 藏 ***********************************/
 /**
  *  收藏数据
  *
@@ -45,6 +48,27 @@
  */
 + (BOOL) isCollectWithModel:(LXMovieModel *)model;
 
+/************************************** 本地化 ***********************************/
+/**
+ *  数据本地化
+ *
+ *  @param modelArray 要保存的数组
+ *  @param category   所属类目
+ */
++ (void) localModeWithArray:(NSArray *)modelArray category:(NSString *)category;
 
+/**
+ *  获取对应类目的本地化数据
+ *
+ *  @param category 需要获取的类目名称
+ *
+ *  @return 类目对应的本地化数据
+ */
++ (NSArray *)arrayLocalModelWithCategory:(NSString *)category;
+
+/**
+ *  清除所有本地化数据
+ */
++ (void) clearAllLocalModel;
 
 @end

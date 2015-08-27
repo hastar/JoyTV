@@ -19,6 +19,7 @@
 
 @interface LXHotCollectView : UIView
 
+@property (nonatomic, copy) NSString *name;
 @property (nonatomic, strong) NSString *dataUrl;
 @property (nonatomic, assign) id<LXHotCollectViewDelegate> delegate;
 

@@ -1,0 +1,10 @@
+platform :ios, '7.0'
+pod "AFNetworking", "~> 2.0"
+pod 'SDWebImage', '~> 3.7.2'
+pod 'FMDB', '~> 2.5'
+pod 'YAScrollSegmentControl', '~> 0.1.0'
+pod 'UMengAnalytics-NO-IDFA'
+pod 'UMengFeedback', '~> 2.3.3'
+    YouToSee收集了大量的短视频，是您休闲、娱乐、拓展视野的最佳选择。有任何建议请联系我们，我们会尽最大努力优化。
+
+    本App所有内容，包括文字、图片、音频等均在网上搜集。访问者可将App提供的内容用于个人学习，研究或观赏，以及其他非商业性或盈利性用途。但同时应遵守著作权法及相关权利人的合法权益。除此以外将本App任何内容用于其他用途时，须征得本App及相关权利人的书面许可。本App内容原作者如不愿意在本App刊登内容，请及时通知本App，予以删除。

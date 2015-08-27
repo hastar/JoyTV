@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "+[LXDataBaseHandle arrayLocalModelWithCategory:]:LXDataBaseHandle.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "category">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "__35-[LXPlayerView monitoringPlayback:]_block_invoke:LXPlayerView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.player.rate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LXPlayerView observeValueForKeyPath:ofObject:change:context:]:LXPlayerView.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.player.rate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[LXUserTableViewCell setModel:]:LXUserTableViewCell.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[LXDtViewController setDescText:]:LXDtViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.desScroll.contentSize">
+            </PersistentString>
+            <PersistentString
+               value = "self.desLabel.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

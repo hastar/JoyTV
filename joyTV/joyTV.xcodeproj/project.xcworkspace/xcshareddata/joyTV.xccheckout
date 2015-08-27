@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0068D198-FF66-4D2F-B13A-A7A2BF3B3F96</string>
+	<key>IDESourceControlProjectName</key>
+	<string>joyTV</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>98E07BCDBB0831F8C061DC9835E0EE75DFF5C6A2</key>
+		<string>https://github.com/hastar/JoyTV.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>joyTV/joyTV.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>98E07BCDBB0831F8C061DC9835E0EE75DFF5C6A2</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hastar/JoyTV.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>98E07BCDBB0831F8C061DC9835E0EE75DFF5C6A2</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>98E07BCDBB0831F8C061DC9835E0EE75DFF5C6A2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>JoyTV</string>
+		</dict>
+	</array>
+</dict>
+</plist>

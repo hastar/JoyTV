@@ -17,6 +17,7 @@
 #import "LXDataBaseHandle.h"
 #import "SDImageCache.h"
 
+#import "LXinformViewController.h"
 #import <MessageUI/MessageUI.h>
 
 #define LXColor(r, g, b, a) [UIColor colorWithRed:(r) green:(g) blue:(b) alpha:(a)]
@@ -44,7 +45,7 @@
 - (NSMutableArray *)dataArray
 {
     if (!_dataArray) {
-        _dataArray = [[NSMutableArray alloc] initWithObjects:@"我的收藏",@"清空缓存", @"关于我们", @"反馈", nil];
+        _dataArray = [[NSMutableArray alloc] initWithObjects:@"我的收藏",@"清空缓存", @"关于我们", @"反馈", @"举报", nil];
     }
     
     return _dataArray;
@@ -155,9 +156,18 @@
                 [self sendEmailAction]; // 调用发送邮件的代码
             }
             else{
-                UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:nil message:@"请设置系统Email" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:@"不乐", nil];
+                UIAlertView *alterView = [[UIAlertView alloc] initWithTitle:nil message:@"请设置系统Email" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:@"不了", nil];
                 [alterView show];
             }
+            
+            break;
+        }
+        case 4:
+        {
+            LXinformViewController *informVC = [[LXinformViewController alloc] init];
+            
+            [self.navigationController pushViewController:informVC animated:YES];
+            break;
         }
             
         default:
@@ -202,7 +212,7 @@
             LXLog(@"Mail send canceled...");
             break;
         case MFMailComposeResultSaved: // 用户保存邮件
-            LXLog(@"Mail send begin...");
+            LXLog(@"Mail send begin.");
             break;
         case MFMailComposeResultSent: // 用户点击发送
             LXLog(@"Mail sent...");

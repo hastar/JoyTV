@@ -33,7 +33,6 @@
 {
     if (!_cateLinkArray) {
         _cateLinkArray = [[NSArray alloc] initWithObjects:@"https://newapi.meipai.com/medias/topics_timeline.json?id=13&type=1&feature=new&locale=1",
-                          @"https://newapi.meipai.com/medias/topics_timeline.json?id=5872924533351051492&type=2&feature=hot&locale=1",
                           @"https://newapi.meipai.com/medias/topics_timeline.json?id=5872239354896137479&type=2&feature=hot&locale=1",
                           @"https://newapi.meipai.com/medias/topics_timeline.json?id=18&type=1&feature=hot&locale=1",
                           @"https://newapi.meipai.com/medias/topics_timeline.json?id=5&type=1&feature=hot&locale=1",nil];
@@ -45,7 +44,7 @@
 - (NSArray*)cateArray
 {
     if (!_cateArray) {
-        _cateArray = [[NSArray alloc] initWithObjects:@"搞笑", @"逗比", @"舞蹈", @"宝宝", @"涨姿势", nil];
+        _cateArray = [[NSArray alloc] initWithObjects:@"搞笑", @"舞蹈", @"宝宝", @"涨姿势", nil];
     }
     
     return _cateArray;
@@ -61,6 +60,7 @@
         {
             LXHotCollectView *collectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 70, kScreenWidth, kScreenHeight - 70 - 40)];
             collectView.delegate = self;
+            collectView.name = self.cateArray[i];
             collectView.dataUrl = self.cateLinkArray[i];
             
             [_collectArray addObject:collectView];

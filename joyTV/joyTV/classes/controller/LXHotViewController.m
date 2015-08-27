@@ -54,6 +54,7 @@
     if (!_hotCollectView) {
         _hotCollectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 50, kScreenWidth, kScreenHeight - 50 - 40)];
         _hotCollectView.delegate = self;
+        _hotCollectView.name = @"最热";
         _hotCollectView.dataUrl = @"https://newapi.meipai.com/hot/feed_timeline.json?locale=1&";
     }
     
@@ -65,6 +66,7 @@
     if (!_newCollectView) {
         _newCollectView = [[LXHotCollectView alloc] initWithFrame:CGRectMake(0, 70, kScreenWidth, kScreenHeight - 70 - 40)];
         _newCollectView.delegate = self;
+        _newCollectView.name = @"最新";
         _newCollectView.dataUrl = @"https://newapi.meipai.com/medias/topics_timeline.json?id=22&type=1&feature=new&locale=1";
     }
     

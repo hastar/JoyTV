@@ -16,6 +16,7 @@
 #import "LXUser.h"
 #import "LXPlayerView.h"
 #import "LXMovieModel.h"
+#import "LXinformViewController.h"
 
 #import "LXDataBaseHandle.h"
 
@@ -32,7 +33,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *userVideoCount;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImage;
 @property (weak, nonatomic) IBOutlet LXPlayerView *videoView;   //视频播放视图
-@property (weak, nonatomic) IBOutlet UILabel *loveCount;
 
 @property (strong, nonatomic) UILabel *desLabel;
 @property (weak, nonatomic) IBOutlet UIScrollView *desScroll;
@@ -43,6 +43,7 @@
 - (IBAction)share:(id)sender;
 //收藏
 - (IBAction)collection:(id)sender;
+- (IBAction)inform:(id)sender;
 
 @end
 
@@ -79,7 +80,6 @@
         self.userName.text = self.model.user.screen_name;
         self.userVideoCount.text = self.model.user.be_liked_count;
         
-        self.loveCount.text = self.model.likes_count;
         [self setDescText:self.model.caption];
         
         
@@ -270,6 +270,16 @@
         [alterView show];
         LXLog(@"已经收藏了");
     }
+    
+}
+
+- (IBAction)inform:(id)sender {
+    
+    //进入举报页面
+    [self.videoView.player pause];
+    
+    LXinformViewController *informVC = [[LXinformViewController alloc] init];
+    [self.navigationController pushViewController:informVC animated:YES];
     
 }
 @end

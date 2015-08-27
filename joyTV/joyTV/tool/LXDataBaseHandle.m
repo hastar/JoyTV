@@ -24,20 +24,23 @@
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-        NSString *dirPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];
+        NSString *dirPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
         NSString *filePath = [dirPath stringByAppendingPathComponent:@"data.sqlite"];
-        LXLog(@"%@", filePath);
+        LXLog(@"sqlPath = %@", dirPath);
+        NSLog(@"%@ ", dirPath);
         myDB = [FMDatabase databaseWithPath:filePath];
         
         [myDB open];
-        NSString *createTableSql = @"create table if not exists collectTable(videoId text primary key,data BLOB)";
+        NSString *createTableSql = @"create table if not exists collectTable(videoId text primary key,data BLOB);";
+        NSString *createLocalSql = @"create table if not exists localTable(videoId text primary key,category text,data BLOB);";
         
         [myDB executeUpdate:createTableSql];
+        [myDB executeUpdate:createLocalSql];
     });
     return myDB;
 }
 
-
+/************************************** 收 藏 ***********************************/
 #pragma mark 收藏数据
 + (BOOL) collectWithMovieModel:(LXMovieModel *)model
 {
@@ -161,5 +164,121 @@
     return NO;
 }
 
+/************************************** 本地化 ***********************************/
+/**
+ *  数据本地化
+ *
+ *  @param modelArray 要保存的数组
+ *  @param category   所属类目
+ */
+#pragma mark 数据本地化
++ (void) localModeWithArray:(NSArray *)modelArray category:(NSString *)category
+{
+    if (category.length <= 0) return;
+    
+    if (modelArray.count <= 0) return;
+    
+    int i = 0;
+    for (LXMovieModel *model in modelArray)
+    {
+        @try
+        {
+            NSMutableData *data = [[NSMutableData alloc] init];
+            NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+            [archiver encodeObject:model forKey:@"movieModel"];
+            [archiver finishEncoding];
+            
+            NSString *sql = [NSString stringWithFormat:@"insert into localTable(videoId,category,data) values('%@', '%@', '%@');", model.ID,category, data];
+            BOOL result = [[self openDB] executeUpdate:sql];
+            if (!result)
+            {
+                LXLog(@"数据插入错误");
+                
+                return ;
+            }
+            
+            i++;
+        }
+        @catch (NSException *exception) {
+            LXLog(@"执行错误");
+        }
+        
+        if (i >= 50) {
+            break;
+        }
+    }
+}
+
+/**
+ *  获取对应类目的本地化数据
+ *
+ *  @param category 需要获取的类目名称
+ *
+ *  @return 类目对应的本地化数据
+ */
+#pragma mark 获取本地化数据
++ (NSArray *)arrayLocalModelWithCategory:(NSString *)category
+{
+    NSLog(@"%@", category);
+    NSMutableArray *modelArray = [[NSMutableArray alloc] initWithCapacity:2];
+    
+    FMResultSet *resultSet = [[self openDB] executeQuery:@"select videoId, data from localTable where category = ?;", category];
+    if (resultSet == nil) {
+        return  nil;
+    }
+    
+    while ([resultSet next]) {
+        NSData *data = [resultSet dataForColumn:@"data"];
+        
+        @try
+        {
+            if (data == nil)
+            {
+                continue;
+            }
+            
+            NSKeyedUnarchiver *unArchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+            LXMovieModel *model = [unArchiver decodeObjectForKey:@"movieModel"];
+            [unArchiver finishDecoding];
+            
+            if (model != nil)
+            {
+                [modelArray addObject:model];
+            }
+            
+        }
+        @catch (NSException *exception) {
+            LXLog(@"读取收藏数据错误");
+        }
+        
+    }
+    
+    return [modelArray copy];
+    
+}
+
+/**
+ *  清除所有本地化数据
+ */
+#pragma mark 清除所有本地化数据
++ (void) clearAllLocalModel
+{
+    @try
+    {
+        BOOL result = [[self openDB] executeUpdate:@"delete from localTable;"];
+        if (!result)
+        {
+            LXLog(@"数据删除错误");
+            
+            return ;
+        }
+        
+    }
+    @catch (NSException *exception)
+    {
+        LXLog(@"执行错误");
+    }
+
+}
 
 @end
