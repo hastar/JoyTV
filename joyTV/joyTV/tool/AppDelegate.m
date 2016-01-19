@@ -59,8 +59,6 @@
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
-    
-    [MobClick checkUpdate];
     [MobClick setEncryptEnabled:YES];
     [MobClick startWithAppkey:@"55b6157ee0f55a8006000d14" reportPolicy:BATCH   channelId:nil];
     

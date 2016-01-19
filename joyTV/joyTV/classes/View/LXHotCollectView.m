@@ -119,6 +119,7 @@
     
     collectCell.userNameLabel.text = model.user.screen_name;
     [collectCell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar] placeholderImage:[UIImage new]];
+    [collectCell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.user.avatar]];
 
     
     return collectCell;

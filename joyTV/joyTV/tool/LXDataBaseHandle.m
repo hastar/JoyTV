@@ -45,7 +45,7 @@
         [myDB open];
         NSString *createTableSql = @"create table if not exists collectTable(videoId text primary key,data BLOB);";
         NSString *createLocalSql = @"create table if not exists localTable(videoId text primary key,category text,data BLOB);";
-        
+//        @"create table TB_ANSWER(id integer primary key autoincrement, name text, data blob, isup integer, date text)"
         [myDB executeUpdate:createTableSql];
         [myDB executeUpdate:createLocalSql];
     });

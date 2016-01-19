@@ -462,6 +462,7 @@
 				3F4309441B5F3A280064A43D /* Frameworks */,
 				3F4309451B5F3A280064A43D /* Resources */,
 				796DC805CF2513D6155C01B1 /* Copy Pods Resources */,
+				C4FED37F14772AB714EA8544 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -603,6 +604,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C4FED37F14772AB714EA8544 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -752,8 +768,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiangyang Mou (32427JF6VL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Xiangyang Mou (32427JF6VL)";
 				INFOPLIST_FILE = joyTV/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -762,7 +778,7 @@
 					"$(PROJECT_DIR)/joyTV/tool/UMSocial_Sdk_4.2.3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "295af730-0164-42c7-bd5c-373d6daf40d3";
+				PROVISIONING_PROFILE = "23c87922-2dab-4aee-b1e3-49f091ef91c9";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -774,7 +790,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Xiangyang Mou (32427JF6VL)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: houlei houlei (53RW4EDKCW)";
 				INFOPLIST_FILE = joyTV/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -784,7 +800,7 @@
 					"$(PROJECT_DIR)/joyTV/tool/UMSocial_Sdk_4.2.3",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "295af730-0164-42c7-bd5c-373d6daf40d3";
+				PROVISIONING_PROFILE = "23c87922-2dab-4aee-b1e3-49f091ef91c9";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
